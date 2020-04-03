@@ -1,5 +1,6 @@
 # Data model
 
+## Record types
 
 ## Vocabularies
 
