@@ -1,0 +1,47 @@
+# Project information
+site_name: 'Invenio ILS Docs'
+site_description: 'Invenio ILS Developer Documentation'
+site_url: 'https://invenio-ils.docs.cern.ch'
+
+# Repository
+repo_name: 'docs-invenio-rdm'
+repo_url: 'https://github.com/inveniosoftware/docs-invenio-rdm'
+
+# Copyright
+copyright: 'Copyright &copy; 2019-2020 CERN and Northwestern University.'
+
+# Configuration
+theme:
+  name: 'material'
+  palette:
+    primary: 'white'
+  font:
+    text: 'Open Sans'
+    code: 'Roboto Mono'
+  feature:
+    tabs: true
+
+nav:
+  - Home: 'index.md'
+  - Architecture:
+      - Record relations: 'system_architecture/record_relations.md`
+
+# Customization
+extra:
+  social:
+  - type: 'github'
+    link: 'https://github.com/inveniosoftware'
+  - type: 'twitter'
+    link: 'https://twitter.com/inveniosoftware'
+  - type: 'comments'
+    link: 'https://invenio-talk.web.cern.ch/c/projects/invenio-rdm'
+  - type: 'globe'
+    link: 'https://inveniosoftware.org/products/rdm/'
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
