@@ -1,10 +1,10 @@
-# docs-invenio-ils
+# [invenioils.docs.cern.ch](https://invenioils.docs.cern.ch)
 
 InvenioILS documentation
 
 ## How to run
 
-To run MkDocs, you need Python 3.
+To run MkDocs, you need Python 3. Create a virtualenv, install Python requirements and run the web server.
 
 ```console
 $ mkvirtualenv docs-invenio-ils

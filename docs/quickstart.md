@@ -4,48 +4,33 @@ TODO
 
 ## Install
 
-First, create a `virtualenv <https://virtualenv.pypa.io/en/stable/installation/>`_
-using `virtualenvwrapper <https://virtualenvwrapper.readthedocs.io/en/latest/install.html>`_
+First, create a [virtualenv](https://virtualenv.pypa.io/en/stable/installation/) using [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/install.html)
 in order to sandbox our Python environment for development:
 
 ```console
-    $ mkvirtualenv my-site
+mkvirtualenv my-site
 ```
 
 Start all dependent services using docker-compose (this will start PostgreSQL, Elasticsearch, RabbitMQ and Redis):
 
 ```console
-    $ docker-compose up -d
+docker-compose up -d
 ```
 
-.. note::
-
-    Make sure you have `enough virtual memory
-    <https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode>`_
-    for Elasticsearch in Docker:
-
-    .. code-block:: shell
-
-        # Linux
-        $ sysctl -w vm.max_map_count=262144
-
-        # macOS
-        $ screen ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty
-        <enter>
-        linut00001:~# sysctl -w vm.max_map_count=262144
-
+!!! warning
+    Make sure you have [enough virtual memory](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode) for Elasticsearch in Docker
 
 Next, bootstrap the instance (this will install all Python dependencies and
 build all static assets):
 
 ```console
-    $ ./scripts/bootstrap
+./scripts/bootstrap
 ```
 
 Next, create database tables, search indexes and message queues:
 
 ```console
-    $ ./scripts/setup
+./scripts/setup
 ```
 
 ## Run
@@ -53,19 +38,19 @@ Next, create database tables, search indexes and message queues:
 Start the webserver:
 
 ```console
-    $ ./scripts/server
+./scripts/server
 ```
 
 Start the a background worker:
 
 ```console
-    $ celery worker -A invenio_app.celery -l INFO
+celery worker -A invenio_app.celery -l INFO
 ```
 
 Start a Python shell:
 
 ```console
-    $ ./scripts/console
+./scripts/console
 ```
 
 TODO: add UI
@@ -75,16 +60,16 @@ TODO: add UI
 Run the test suite via the provided script:
 
 ```console
-
-    $ ./run-tests.sh
+./run-tests.sh
+```
 
 ## Developers documentation
 
 You can build the documentation with:
 
 ```console
-
-    $ python setup.py build_sphinx
+python setup.py build_sphinx
+```
 
 ## Development
 
@@ -99,33 +84,33 @@ First of all, you have to create your own personal access token, to be able to G
 * start the backend server:
 
     ```console
-
-        $ ./scripts/server
+    ./scripts/server
+    ```
 
 * start the ui server:
 
     ```console
-
-        $ cd ./ui && npm start
+    cd ./ui && npm start
+    ```
 
 * If you run invenio in an port other than `5000` you need to run the below commands:
 
     ```console
+    echo 'REACT_APP_BACKEND_DEV_BASE_URL=https://localhost:<your-new-port>' > ./invenio_app_ils/ui/.env.development
+    echo 'REACT_APP_BACKEND_DEV_BASE_URL=https://localhost:<your-new-port>' > ./invenio_app_ils/ui/.env.test
+    ```
 
-        $ echo 'REACT_APP_BACKEND_DEV_BASE_URL=https://localhost:<your-new-port>' > ./invenio_app_ils/ui/.env.development
-        $ echo 'REACT_APP_BACKEND_DEV_BASE_URL=https://localhost:<your-new-port>' > ./invenio_app_ils/ui/.env.test
 
+*  since the React app is server under a different port (normally, :3000), you
+   need to configure Invenio to allow requests from different domains. In your
+   virtual environment navigate to ``~/.virtualenvs/ils/var/instance``, if there
+   is no file ``invenio.cfg`` create one and add the following configuration,
+   which will override the existing configuration we have in ``config.py``
 
-* | since the React app is server under a different port (normally, :3000), you
-  | need to configure Invenio to allow requests from different domains. In your
-  | virtual environment navigate to ``~/.virtualenvs/ils/var/instance``, if there
-  | is no file ``invenio.cfg`` create one and add the following configuration,
-  | which will override the existing configuration we have in ``config.py``
-
-    .. code-block:: python
-
-        CORS_SEND_WILDCARD = False
-        CORS_SUPPORTS_CREDENTIALS = True
+    ```python
+    CORS_SEND_WILDCARD = False
+    CORS_SUPPORTS_CREDENTIALS = True
+    ```
 
 ## Vocabularies
 
@@ -135,16 +120,16 @@ source file. To manage vocabularies use the ``ils vocabulary`` CLI.
 Some pre-defined vocabulary generators are available. To generate a JSON file
 with a list of languages or countries use:
 
-    ```console
-
-        ils vocabulary generate languages -o languages.json
-        ils vocabulary generate countries -o countries.json
+```console
+ils vocabulary generate languages -o languages.json
+ils vocabulary generate countries -o countries.json
+```
 
 To add vocabularies from a JSON file use the ``index`` command:
 
-    ```console
-
-        ils vocabulary index json [file1.json, file2.json, ...]
+```console
+ils vocabulary index json [file1.json, file2.json, ...]
+```
 
 To add custom vocabularies or modify the text or data of an existing vocabulary
 use the same ``index`` command as above.
@@ -153,10 +138,10 @@ If you change the ``key`` attribute of a vocabulary or if you remove a vocabular
 you also need to remove it from Elasticsearch. Use the ``delete`` command to
 remove a vocabulary:
 
-    ```console
-
-        ils vocabulary delete country  # remove all countries
-        ils vocabulary delete country --key CH  # remove only Switzerland
+```console
+ils vocabulary delete country  # remove all countries
+ils vocabulary delete country --key CH  # remove only Switzerland
+```
 
 Example vocabularies are available in ``invenio_app_ils/vocabularies/data``.
 
