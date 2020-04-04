@@ -6,7 +6,7 @@ InvenioILS documentation
 
 To run MkDocs, you need Python 3. Create a virtualenv, install Python requirements and run the web server.
 
-```console
+```bash
 $ mkvirtualenv docs-invenio-ils
 $ pip install -r requirements.txt
 $ mkdocs serve

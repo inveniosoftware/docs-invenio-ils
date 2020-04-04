@@ -7,29 +7,29 @@ TODO
 First, create a [virtualenv](https://virtualenv.pypa.io/en/stable/installation/) using [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/install.html)
 in order to sandbox our Python environment for development:
 
-```console
+```bash
 mkvirtualenv my-site
 ```
 
 Start all dependent services using docker-compose (this will start PostgreSQL, Elasticsearch, RabbitMQ and Redis):
 
-```console
+```bash
 docker-compose up -d
 ```
 
 !!! warning
-    Make sure you have [enough virtual memory](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode) for Elasticsearch in Docker
+    Make sure you have [enough virtual memory](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode) for Elasticsearch in Docker.
 
 Next, bootstrap the instance (this will install all Python dependencies and
 build all static assets):
 
-```console
+```bash
 ./scripts/bootstrap
 ```
 
 Next, create database tables, search indexes and message queues:
 
-```console
+```bash
 ./scripts/setup
 ```
 
@@ -37,19 +37,19 @@ Next, create database tables, search indexes and message queues:
 
 Start the webserver:
 
-```console
+```bash
 ./scripts/server
 ```
 
 Start the a background worker:
 
-```console
+```bash
 celery worker -A invenio_app.celery -l INFO
 ```
 
 Start a Python shell:
 
-```console
+```bash
 ./scripts/console
 ```
 
@@ -59,7 +59,7 @@ TODO: add UI
 
 Run the test suite via the provided script:
 
-```console
+```bash
 ./run-tests.sh
 ```
 
@@ -67,7 +67,7 @@ Run the test suite via the provided script:
 
 You can build the documentation with:
 
-```console
+```bash
 python setup.py build_sphinx
 ```
 
@@ -83,19 +83,19 @@ First of all, you have to create your own personal access token, to be able to G
 
 * start the backend server:
 
-    ```console
+    ```bash
     ./scripts/server
     ```
 
 * start the ui server:
 
-    ```console
+    ```bash
     cd ./ui && npm start
     ```
 
 * If you run invenio in an port other than `5000` you need to run the below commands:
 
-    ```console
+    ```bash
     echo 'REACT_APP_BACKEND_DEV_BASE_URL=https://localhost:<your-new-port>' > ./invenio_app_ils/ui/.env.development
     echo 'REACT_APP_BACKEND_DEV_BASE_URL=https://localhost:<your-new-port>' > ./invenio_app_ils/ui/.env.test
     ```
@@ -120,14 +120,14 @@ source file. To manage vocabularies use the ``ils vocabulary`` CLI.
 Some pre-defined vocabulary generators are available. To generate a JSON file
 with a list of languages or countries use:
 
-```console
+```bash
 ils vocabulary generate languages -o languages.json
 ils vocabulary generate countries -o countries.json
 ```
 
 To add vocabularies from a JSON file use the ``index`` command:
 
-```console
+```bash
 ils vocabulary index json [file1.json, file2.json, ...]
 ```
 
@@ -138,7 +138,7 @@ If you change the ``key`` attribute of a vocabulary or if you remove a vocabular
 you also need to remove it from Elasticsearch. Use the ``delete`` command to
 remove a vocabulary:
 
-```console
+```bash
 ils vocabulary delete country  # remove all countries
 ils vocabulary delete country --key CH  # remove only Switzerland
 ```
