@@ -1,4 +1,4 @@
-### Access and restrictions
+# Access and restrictions
 
 This is only a part of a bigger article, with many sections still not documented. If you are an expert on the subject, please contribute.
 
@@ -46,6 +46,6 @@ This example will not be discussed here as it is already documented ([here](http
 ### Open access field
 The field implementation and naming is a result of one of the requirements which we used as a reference to construct the system.
 
-Most of the electronic item records have assigned URL as a resource, to an external provider. 
-From the ILS point of view those URLs can require a login to external providers website, and the patron should be informed about it. In the same the Electronic item record should not be restricted. 
+Most of the electronic item records have assigned URL as a resource, to an external provider.
+From the ILS point of view those URLs can require a login to external providers website, and the patron should be informed about it. In the same the Electronic item record should not be restricted.
 Open access informs the patron that the link is accessible without any additional restrictions, and the intention of the client was to promote the open over the restricted

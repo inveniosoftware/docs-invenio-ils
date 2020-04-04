@@ -1,28 +1,22 @@
-..
-    Copyright (C) 2018 CERN.
+# Quickstart
 
-    invenio-app-ils is free software; you can redistribute it and/or modify it
-    under the terms of the MIT License; see LICENSE file for more details.
-    
-# Welcome to Invenio-ILS
+TODO
 
-Installation
-============
+## Install
 
 First, create a `virtualenv <https://virtualenv.pypa.io/en/stable/installation/>`_
 using `virtualenvwrapper <https://virtualenvwrapper.readthedocs.io/en/latest/install.html>`_
 in order to sandbox our Python environment for development:
 
-.. code-block:: console
-
+```console
     $ mkvirtualenv my-site
+```
 
-Start all dependent services using docker-compose (this will start PostgreSQL,
-Elasticsearch 6, RabbitMQ and Redis):
+Start all dependent services using docker-compose (this will start PostgreSQL, Elasticsearch, RabbitMQ and Redis):
 
-.. code-block:: console
-
+```console
     $ docker-compose up -d
+```
 
 .. note::
 
@@ -44,75 +38,59 @@ Elasticsearch 6, RabbitMQ and Redis):
 Next, bootstrap the instance (this will install all Python dependencies and
 build all static assets):
 
-.. code-block:: console
-
+```console
     $ ./scripts/bootstrap
+```
 
 Next, create database tables, search indexes and message queues:
 
-.. code-block:: console
-
+```console
     $ ./scripts/setup
+```
 
-Running
--------
+## Run
+
 Start the webserver:
 
-.. code-block:: console
-
+```console
     $ ./scripts/server
+```
 
 Start the a background worker:
 
-.. code-block:: console
-
+```console
     $ celery worker -A invenio_app.celery -l INFO
+```
 
 Start a Python shell:
 
-.. code-block:: console
-
+```console
     $ ./scripts/console
+```
 
-Upgrading
----------
-In order to upgrade an existing instance simply run:
+TODO: add UI
 
-.. code-block:: console
+## Testing
 
-    $ ./scripts/update
-
-Testing
--------
 Run the test suite via the provided script:
 
-.. code-block:: console
+```console
 
     $ ./run-tests.sh
 
-By default, end-to-end tests are skipped. You can include the E2E tests like
-this:
+## Developers documentation
 
-.. code-block:: console
-
-    $ env E2E=yes ./run-tests.sh
-
-For more information about end-to-end testing see `pytest-invenio
-<https://pytest-invenio.readthedocs.io/en/latest/usage.html#running-e2e-tests>`_
-
-Documentation
--------------
 You can build the documentation with:
 
-.. code-block:: console
+```console
 
     $ python setup.py build_sphinx
 
-UI Development
---------------
+## Development
 
-The user interface is a standalone React application created using
-[create-react-app](https://facebook.github.io/create-react-app/).
+### UI
+
+The user interface is a standalone React application created using [create-react-app](https://facebook.github.io/create-react-app/).
 The easiest development setup consists in starting separately Invenio, for REST APIs, and the React app using the
 create-react-app webserver.
 
@@ -120,19 +98,19 @@ First of all, you have to create your own personal access token, to be able to G
 
 * start the backend server:
 
-    .. code-block:: console
+    ```console
 
         $ ./scripts/server
 
 * start the ui server:
 
-    .. code-block:: console
+    ```console
 
         $ cd ./ui && npm start
 
 * If you run invenio in an port other than `5000` you need to run the below commands:
 
-    .. code-block:: console
+    ```console
 
         $ echo 'REACT_APP_BACKEND_DEV_BASE_URL=https://localhost:<your-new-port>' > ./invenio_app_ils/ui/.env.development
         $ echo 'REACT_APP_BACKEND_DEV_BASE_URL=https://localhost:<your-new-port>' > ./invenio_app_ils/ui/.env.test
@@ -149,41 +127,22 @@ First of all, you have to create your own personal access token, to be able to G
         CORS_SEND_WILDCARD = False
         CORS_SUPPORTS_CREDENTIALS = True
 
+## Vocabularies
 
-Production environment
-----------------------
-You can use simulate a full production environment using the
-``docker-compose.full.yml``. You can start it like this:
-
-.. code-block:: console
-
-    $ docker-compose -f docker-compose.full.yml up -d
-
-In addition to the normal ``docker-compose.yml``, this one will start:
-
-- HAProxy (load balancer)
-- Nginx (web frontend)
-- UWSGI (application container)
-- Celery (background task worker)
-- Flower (Celery monitoring)
-
-
-Vocabularies
-------------
 Vocabularies are indexed using Elasticsearch and can be indexed from a JSON
 source file. To manage vocabularies use the ``ils vocabulary`` CLI.
 
 Some pre-defined vocabulary generators are available. To generate a JSON file
 with a list of languages or countries use:
 
-    .. code-block:: console
+    ```console
 
         ils vocabulary generate languages -o languages.json
         ils vocabulary generate countries -o countries.json
 
 To add vocabularies from a JSON file use the ``index`` command:
 
-    .. code-block:: console
+    ```console
 
         ils vocabulary index json [file1.json, file2.json, ...]
 
@@ -194,7 +153,7 @@ If you change the ``key`` attribute of a vocabulary or if you remove a vocabular
 you also need to remove it from Elasticsearch. Use the ``delete`` command to
 remove a vocabulary:
 
-    .. code-block:: console
+    ```console
 
         ils vocabulary delete country  # remove all countries
         ils vocabulary delete country --key CH  # remove only Switzerland
@@ -202,3 +161,7 @@ remove a vocabulary:
 Example vocabularies are available in ``invenio_app_ils/vocabularies/data``.
 
 Vocabulary-specific configuration is available in ``config.py`` and ``invenioConfig.js``.
+
+## Demo data
+
+TODO

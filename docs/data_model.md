@@ -1,12 +1,14 @@
 # Data model
 
-## Record types
+TODO
 
-## Vocabularies
+## Literature
 
-### Document
+## Document
 
-#### Identifiers
+TODO
+
+### Identifiers
 
 The identifiers field contains the list of the persistent identifiers relevant to the record, with particular focus on the identifiers which are connected with the domain, like `ISBN`.
 The field is structured as
@@ -24,7 +26,22 @@ The field is structured as
 
 to allow for certain flexibility of adding different types of identifiers. The list of possible `scheme` values can be provided by using vocabularies.
 
+#### ISBN, ISSN
+
+https://www.isbn-international.org/content/what-isbn
+
+https://portal.issn.org/
+
+#### DOI
+
+More on https://www.doi.org/
 
 #### Alternative identifiers
 
-Alternative identifiers contain suplementary information about the identifiers.
+TODO
+
+## Series
+
+## Item and E-item
+
+## Vocabularies

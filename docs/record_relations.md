@@ -1,8 +1,8 @@
-### Record relations
+# Record relations
 
 A relation is simply a link, a reference, from one record to another. Optionally, it can have some extra metadata to describe the relation. For example, in a library you can find a book written in English language and the same book in French. It is a nice feature for cataloguing purposes but also to show to the user that a book also exists in another language. It is natural to think then that a language relation can link these 2 books.
 
-#### Understanding the data model
+## Understanding the data model
 
 In InvenioILS, only document and series can have relations. Other models do not have this functionality enabled. (TODO link to domain section).
 Three kind of relation exists in InvenioILS:
@@ -20,7 +20,7 @@ TODO add a small diagram here?
 
 * `Sequence relation`: models the relation between records of the same model, where the order is important. For example, a journal series that at certain point in time stops the publication of volumes and issues (*the previous*) but it then continues in a completely new series (*the next*): the older series *is continued by* the new one, or the new series *continues* the older one.
 
-#### Under the hood
+## Under the hood
 
 Relations between records are stored safely in the Invenio database and they are used as source of truth when validating exiting of new relations. InvenioILS uses [InvenioPIDRelations](https://github.com/inveniosoftware/invenio-pidrelations) module to store the relations graph as Parent-Child relation, basically list of tuples `Parent PID`, `Child PID` and `Relation Type`. There is no extra metadata that can be stored at the moment for each relation.
 InvenioILS hides this internal implementation and adds an abstraction on top, to model not only Parent-Child relations, but also the other types described above.
@@ -30,7 +30,7 @@ Each record with relations has, at least, an extra field `relations` in its meta
 Since relations extra metadata, e.g. the `volume` for `Parent-Child relations` cannot be stored in the database, it is instead stored in the record metadata, in the `relations_extra_metadata` field. To avoid duplication, the extra metadata is stored only in one of the record of the relation: when fetching or indexing the second record of the relation, the extra metadata is automatically read from the first and added it on the fly.
 See the section below for more clear explanations.
 
-#### Relations metadata
+## Relations metadata
 
 When creating a new relation, the extra metadata is always and only stored in the parent or first record metadata. Let's see an example.
 

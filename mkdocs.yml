@@ -1,0 +1,50 @@
+# Project information
+site_name: Documentation
+site_description: InvenioILS documentation web site
+site_url: https://invenio-ils.docs.cern.ch
+
+# Repository
+repo_name: docs-invenio-ils
+repo_url: https://github.com/inveniosoftware/docs-invenio-ils
+
+# Copyright
+copyright: Copyright &copy; 2020 CERN
+
+# Configuration
+theme:
+  name: material
+  palette:
+    primary: white
+  font:
+    text: Open Sans
+    code: Roboto Mono
+  logo: assets/images/logo-ils.svg
+  favicon: assets/images/favicon.svg
+
+nav:
+  - Introduction: index.md
+  - Quickstart: quickstart.md
+  - Data model:
+    - Understanding data model: data_model.md
+    - Records relations: record_relations.md
+  - Managing access: access_and_restrictions.md
+
+# Customization
+extra:
+  social:
+  - type: github
+    link: https://github.com/inveniosoftware
+  - type: twitter
+    link: https://twitter.com/inveniosoftware
+  - type: globe
+    link: https://inveniosoftware.org/products/ils/
+extra_css:
+  - assets/stylesheets/extra.css
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
