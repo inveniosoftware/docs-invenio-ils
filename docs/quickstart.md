@@ -4,6 +4,11 @@ TODO
 
 ## Install
 
+The installation process is composed of two parts: install and run Invenio backend, and install and run JS frontend (Single Page Application).
+At the moment, InvenioILS is still under development. The following quickstart guide is to run InvenioILS in a development environment.
+
+### Invenio backend
+
 First, create a [virtualenv](https://virtualenv.pypa.io/en/stable/installation/) using [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/install.html)
 in order to sandbox our Python environment for development:
 
@@ -20,47 +25,114 @@ docker-compose up -d
 !!! warning
     Make sure you have [enough virtual memory](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode) for Elasticsearch in Docker.
 
-Next, bootstrap the instance (this will install all Python dependencies and
-build all static assets):
+Bootstrap the instance (this will install all Python dependencies and build all static assets):
 
 ```bash
 ./scripts/bootstrap
 ```
 
-Next, create database tables, search indexes and message queues:
+Next, create database tables, search indexes, message queues and demo data:
 
 ```bash
 ./scripts/setup
 ```
 
+The previous step created a set of demo data that allows to try the product. By default, the following users are created:
+
+| user | email | psw | notes |
+| - | - | - | - |
+| admin | admin@test.ch | 123456 | super admin user, can access also to /admin |
+| librarian | librarian@test.ch | 123456 | user with "librarian" rights, can access to backoffice |
+| patron1 | patron1@test.ch | 123456 | a patron user, cannot access to backoffice |
+| patron2 | patron2@test.ch | 123456 | a patron user, cannot access to backoffice |
+| patron3 | patron3@test.ch | 123456 | a patron user, cannot access to backoffice |
+| patron4 | patron4@test.ch | 123456 | a patron user, cannot access to backoffice |
+
+Since the InvenioILS web server is running on a different HTTP port (`:5000`) of the UI web server (`:3000`), we will have to tune Invenio configuration
+to allow HTTP requests from different domain (CORS). To do that, we override the default configuration via the `invenio.cfg` file:
+
+Navigate to your virtualenv, e.g. `~/.virtualenvs/invappils/var/instance`, and create a new file `invenio.cfg`:
+
+```python
+CORS_SEND_WILDCARD = False
+CORS_SUPPORTS_CREDENTIALS = True
+```
+
+For the time being, InvenioILS configuration requires also a "default" library for the circulation module to function correctly.
+You can skip this step if you are not performing actions on loans (you will have an error otherwise, for example on checkout/checkin).
+This will be fixed and removed before the finalization of the development.
+
+After running the setup step and demo data are created, you should find in the console output a line similar to:
+
+```console
+Locations created (ILS_DEFAULT_LOCATION_PID=4zg8k-5qb35)
+```
+
+Copy that PID and use in in your `invenio.cfg`:
+
+```python
+CORS_SEND_WILDCARD = False
+CORS_SUPPORTS_CREDENTIALS = True
+# add this temporary variable for dev purposes, it will be removed soon
+ILS_DEFAULT_LOCATION_PID="4zg8k-5qb35"
+```
+
+If you re-run the `setup` script and re-generate the demo data, you will have to update this value.
+
+!!! note
+    Do not forget to restart the InvenioILS backend webserver if already running.
+
+
+http://localhost:3000/backoffice/locations
+
+### UI frontend
+
+Simply install the `npm` dependencies.
+
+```bash
+cd ui
+npm install
+```
+
 ## Run
 
-Start the webserver:
+The easiest way to run and develop is to run separately Invenio, for REST APIs, and the UI app using the npm web development server.
+
+### Invenio backend
+
+Start the Invenio backend web server (remember to have the virtualenv activated):
 
 ```bash
 ./scripts/server
 ```
 
-Start the a background worker:
+Start the celery worker:
 
 ```bash
 celery worker -A invenio_app.celery -l INFO
 ```
 
-Start a Python shell:
+### UI
+
+The user interface is a single page React application created using [create-react-app](https://facebook.github.io/create-react-app/).
 
 ```bash
-./scripts/console
+cd ui
+npm start
 ```
-
-TODO: add UI
 
 ## Testing
 
-Run the test suite via the provided script:
+Run the backend tests, run:
 
 ```bash
 ./run-tests.sh
+```
+
+For the frontend tests:
+```bash
+cd ui
+npm test
 ```
 
 ## Developers documentation
@@ -70,47 +142,6 @@ You can build the documentation with:
 ```bash
 python setup.py build_sphinx
 ```
-
-## Development
-
-### UI
-
-The user interface is a standalone React application created using [create-react-app](https://facebook.github.io/create-react-app/).
-The easiest development setup consists in starting separately Invenio, for REST APIs, and the React app using the
-create-react-app webserver.
-
-First of all, you have to create your own personal access token, to be able to GET or POST data to the API:
-
-* start the backend server:
-
-    ```bash
-    ./scripts/server
-    ```
-
-* start the ui server:
-
-    ```bash
-    cd ./ui && npm start
-    ```
-
-* If you run invenio in an port other than `5000` you need to run the below commands:
-
-    ```bash
-    echo 'REACT_APP_BACKEND_DEV_BASE_URL=https://localhost:<your-new-port>' > ./invenio_app_ils/ui/.env.development
-    echo 'REACT_APP_BACKEND_DEV_BASE_URL=https://localhost:<your-new-port>' > ./invenio_app_ils/ui/.env.test
-    ```
-
-
-*  since the React app is server under a different port (normally, :3000), you
-   need to configure Invenio to allow requests from different domains. In your
-   virtual environment navigate to ``~/.virtualenvs/ils/var/instance``, if there
-   is no file ``invenio.cfg`` create one and add the following configuration,
-   which will override the existing configuration we have in ``config.py``
-
-    ```python
-    CORS_SEND_WILDCARD = False
-    CORS_SUPPORTS_CREDENTIALS = True
-    ```
 
 ## Vocabularies
 
