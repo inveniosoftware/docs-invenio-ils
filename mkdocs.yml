@@ -1,7 +1,7 @@
 # Project information
 site_name: Documentation
 site_description: InvenioILS documentation web site
-site_url: https://invenio-ils.docs.cern.ch
+site_url: https://invenioils.docs.cern.ch
 
 # Repository
 repo_name: docs-invenio-ils
