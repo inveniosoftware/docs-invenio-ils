@@ -18,8 +18,8 @@ theme:
   font:
     text: Open Sans
     code: Roboto Mono
-  logo: assets/images/logo-ils.svg
-  favicon: assets/images/favicon.svg
+  logo: assets/images/logo-ils.png
+  favicon: assets/images/favicon.png
 
 nav:
   - Introduction: index.md
