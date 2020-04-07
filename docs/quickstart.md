@@ -178,6 +178,33 @@ Example vocabularies are available in ``invenio_app_ils/vocabularies/data``.
 
 Vocabulary-specific configuration is available in ``config.py`` and ``invenioConfig.js``.
 
+
+## Troubleshooting FAQ
+
+### UI network errors
+
+If you are seeing in your application UI errors:
+```
+Something went wrong
+Network Error
+```
+
+You can find out more about the error by checking the console in your browser's developer tools.
+
+Verify if:
+
+1. The backend server is running correctly (the console showing no exceptions)
+2. You have followed the installation guide 
+3. the CORS policy is disabled for your local instance (not for any production environments!): [check backend installation tutorial](###Invenio backend)
+4. your browser has the exception for the https temporary certificate of the local instance.   
+
+#### Adding the certificate to the browser exceptions:
+1. In your browser go to:
+```localhost:5000/```
+2. You will see a warning about the certificate. You need to proceed to the website and agree for adding the certificate to the exceptions
+3. Reload your UI. 
+
+
 ## Demo data
 
 TODO
