@@ -28,6 +28,8 @@ nav:
     - Understanding data model: data_model.md
     - Records relations: record_relations.md
   - Managing access: access_and_restrictions.md
+  - Miscellaneous:
+      - Static paes: static_pages.md
 
 # Customization
 extra:
