@@ -4,9 +4,42 @@ TODO
 
 ## Literature
 
-## Document
+### Cover Metadata
 
-TODO
+The field of `cover_metadata` was introduced to provide support for different
+literature cover providers. The property that was selected to be used as a
+cover is provided in the follwoing form, where the key of the entry is the
+type of data we will use to fetch the cover from our provider, followed by its value.
+In this example we are using the commonly used `isbn`. For example Open Library
+covers API provides support also for `OCLC`, `LCCN`, `OLID` and `ID`.
+
+```console
+cover_metadata = {
+  "isbn": "0123456789"
+}
+```
+
+By overriding `ILS_LITERATURE_COVER_URLS_BUILDER` you can provide your "logic"
+about the covers.
+
+When `covers_metadata` are getting resolved they are getting decorated with
+the `urls` for the covers based on `ILS_LITERATURE_COVER_URLS_BUILDER`.
+The current implementation provides 3 different urls based on the size `small`,
+`medium` and `large`, so when you are fetching a literature record your
+`cover_metadata` should look like:
+
+```console
+cover_metadata = {
+  "isbn": "0123456789",
+  "urls": {
+    "small": "https://your.provider.com/?isbn={your_isbn}&size=small"
+    "medium": "https://your.provider.com/?isbn={your_isbn}&size=medium"
+    "large": "https://your.provider.com/?isbn={your_isbn}&size=large"
+  }
+}
+```
+
+## Document
 
 ### Identifiers
 
