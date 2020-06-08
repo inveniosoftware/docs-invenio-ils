@@ -9,6 +9,8 @@ At the moment, InvenioILS is still under development. The following quickstart g
 
 ### Invenio backend
 
+Clone the project repository from GitHub: https://github.com/inveniosoftware/invenio-app-ils.
+
 First, create a [virtualenv](https://virtualenv.pypa.io/en/stable/installation/) using [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/install.html)
 in order to sandbox our Python environment for development:
 
@@ -87,7 +89,8 @@ http://localhost:3000/backoffice/locations
 
 ### UI frontend
 
-Simply install the `npm` dependencies.
+Clone the project repository from GitHub: https://github.com/inveniosoftware/react-invenio-app-ils.
+Then, install the `npm` dependencies.
 
 ```bash
 cd ui
@@ -103,6 +106,7 @@ The easiest way to run and develop is to run separately Invenio, for REST APIs, 
 Start the Invenio backend web server (remember to have the virtualenv activated):
 
 ```bash
+cd invenio-app-ils
 ./scripts/server
 ```
 
@@ -117,7 +121,7 @@ celery worker -A invenio_app.celery -l INFO
 The user interface is a single page React application created using [create-react-app](https://facebook.github.io/create-react-app/).
 
 ```bash
-cd ui
+cd react-invenio-app-ils
 npm start
 ```
 
@@ -194,15 +198,15 @@ You can find out more about the error by checking the console in your browser's 
 Verify if:
 
 1. The backend server is running correctly (the console showing no exceptions)
-2. You have followed the installation guide 
+2. You have followed the installation guide
 3. the CORS policy is disabled for your local instance (not for any production environments!): [check backend installation tutorial](###Invenio backend)
-4. your browser has the exception for the https temporary certificate of the local instance.   
+4. your browser has the exception for the https temporary certificate of the local instance.
 
 #### Adding the certificate to the browser exceptions:
 1. In your browser go to:
 ```localhost:5000/```
 2. You will see a warning about the certificate. You need to proceed to the website and agree for adding the certificate to the exceptions
-3. Reload your UI. 
+3. Reload your UI.
 
 
 ## Demo data
