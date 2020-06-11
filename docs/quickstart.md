@@ -93,7 +93,6 @@ Clone the project repository from GitHub: https://github.com/inveniosoftware/rea
 Then, install the `npm` dependencies.
 
 ```bash
-cd ui
 npm install
 ```
 
