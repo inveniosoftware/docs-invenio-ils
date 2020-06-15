@@ -181,6 +181,29 @@ Example vocabularies are available in ``invenio_app_ils/vocabularies/data``.
 
 Vocabulary-specific configuration is available in ``config.py`` and ``invenioConfig.js``.
 
+## Develop React-invenio-app-ils as a npm linked library
+
+1. Setup react-invenio-app-ils ready for development
+```bash
+cd react-invenio-app-ils
+npm install
+npm run build
+``` 
+
+2. Link the distribution (the scripts are already provided in package.json)
+and refresh on changes - it will build your dist folder
+```bash
+npm run link-dist
+npm run watch
+```
+
+3. Go to your app, where you specified react-invenio-app-ils as your dependency and link the locally developed react-invenio-app-il
+```bash
+cd <my-react-app>
+npm install
+npm link @inveniosoftware/react-invenio-app-ils
+```
+
 
 ## Troubleshooting FAQ
 
@@ -207,6 +230,21 @@ Verify if:
 2. You will see a warning about the certificate. You need to proceed to the website and agree for adding the certificate to the exceptions
 3. Reload your UI.
 
+
+#### Developing with react-invenio-app-ils as a local npm linked library problems
+
+If you see this error (on clean mester branches):
+```
+×
+Error: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://fb.me/react-invalid-hook-call for tips about how to debug and fix this problem.
+```
+
+Verify if your linked library points to correct folders, f.e. `react-invenio-app-ils/dist`.
+React library might be loaded twice, from your app and from `react-invenio-app-ils` library.
 
 ## Demo data
 
