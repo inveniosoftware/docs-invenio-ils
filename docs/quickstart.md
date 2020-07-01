@@ -39,7 +39,8 @@ Next, create database tables, search indexes, message queues and demo data:
 ./scripts/setup
 ```
 
-The previous step created a set of demo data that allows to try the product. By default, the following users are created:
+The previous step created a set of demo data that allows to try the product.
+You can find the list of demo users in the homepage of InvenioILS when you run it. Otherwise, here the list:
 
 | user | email | psw | notes |
 | - | - | - | - |
@@ -58,25 +59,6 @@ Navigate to your virtualenv, e.g. `~/.virtualenvs/invappils/var/instance`, and c
 ```python
 CORS_SEND_WILDCARD = False
 CORS_SUPPORTS_CREDENTIALS = True
-```
-
-For the time being, InvenioILS configuration requires also a "default" library for the circulation module to function correctly.
-You can skip this step if you are not performing actions on loans (you will have an error otherwise, for example on checkout/checkin).
-This will be fixed and removed before the finalization of the development.
-
-After running the setup step and demo data are created, you should find in the console output a line similar to:
-
-```console
-Locations created (ILS_DEFAULT_LOCATION_PID=4zg8k-5qb35)
-```
-
-Copy that PID and use in in your `invenio.cfg`:
-
-```python
-CORS_SEND_WILDCARD = False
-CORS_SUPPORTS_CREDENTIALS = True
-# add this temporary variable for dev purposes, it will be removed soon
-ILS_DEFAULT_LOCATION_PID="4zg8k-5qb35"
 ```
 
 If you re-run the `setup` script and re-generate the demo data, you will have to update this value.
@@ -185,10 +167,10 @@ Vocabulary-specific configuration is available in ``config.py`` and ``invenioCon
 
 1. Setup react-invenio-app-ils ready for development
 ```bash
-cd <react-invenio-app-ils dir> 
+cd <react-invenio-app-ils dir>
 npm install
 npm run build
-``` 
+```
 
 2. Link the distribution (the scripts are already provided in package.json)
 and refresh on changes - it will build your dist folder
