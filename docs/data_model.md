@@ -73,8 +73,19 @@ More on https://www.doi.org/
 
 TODO
 
+### Subjects, keywords and tags
+
+Subjects, keywords and tags can be use to categorize or group content. They have different purposes:
+
+* The `subjects` field can contain a list of subject terms to describe a document. The list of subjects are defined with controlled vocabularies.
+* The `keywords` field can contain a list of keywords or tags in the form `source` with `value` to identify from where the keyword is coming from, and it can be freely input when cataloguing.
+* The `tags` field can contain a list of tags, a simple text value, but values are defined with a controlled vocabulary to avoid duplications or spelling mistakes.
+
+
 ## Series
 
 ## Item and E-item
+
+## Locations and internal locations
 
 ## Vocabularies
