@@ -29,7 +29,7 @@ nav:
     - Records relations: record_relations.md
   - Managing access: access_and_restrictions.md
   - Miscellaneous:
-      - Static paes: static_pages.md
+      - Static pages: static_pages.md
 
 # Customization
 extra:
