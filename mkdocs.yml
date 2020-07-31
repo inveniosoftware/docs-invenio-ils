@@ -30,6 +30,7 @@ nav:
   - Managing access: access_and_restrictions.md
   - Miscellaneous:
       - Static pages: static_pages.md
+      - User anonymization: anonymization.md
 
 # Customization
 extra:
