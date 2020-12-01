@@ -37,8 +37,7 @@ Start all dependent services using docker-compose (this will start PostgreSQL, E
 docker-compose up -d
 ```
 
-!!! warning
-Make sure you have [enough virtual memory](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode) for Elasticsearch in Docker.
+> Make sure you have [enough virtual memory](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode) for Elasticsearch in Docker.
 
 Bootstrap the instance (this will install all Python dependencies and build all static assets):
 
