@@ -1,21 +1,34 @@
 # Quickstart
 
-TODO
-
-## Install
-
 The installation process is composed of two parts: install and run Invenio backend, and install and run JS frontend (Single Page Application).
 At the moment, InvenioILS is still under development. The following quickstart guide is to run InvenioILS in a development environment.
 
-### Invenio backend
+## Install
 
-Clone the project repository from GitHub: <https://github.com/inveniosoftware/invenio-app-ils>.
+### Prerequisites
 
-First, create a [virtualenv](https://virtualenv.pypa.io/en/stable/installation/) using [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/install.html)
-in order to sandbox our Python environment for development:
+In your computer, you will need:
+
+* GIT to clone the repository
+* Python 3, at the moment we are using Python 3.6
+* [virtualenv](https://virtualenv.pypa.io/en/stable/installation.html#via-pip)) and [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/install.html)
+* [Docker](https://docs.docker.com/get-docker/) and [docker-compose](https://docs.docker.com/compose/install/)
+* [NodeJS](https://nodejs.org/en/download/) latest LTS release
+
+### Install Invenio backend
+
+Clone the project repository from GitHub <https://github.com/inveniosoftware/invenio-app-ils>.
 
 ```bash
-mkvirtualenv my-site
+cd <my directory e.g. myprojects>/invenioils
+git clone https://github.com/inveniosoftware/invenio-app-ils invenioils
+cds invenioils
+```
+
+Create a new Python `virtualenv`:
+
+```bash
+mkvirtualenv invenioils
 ```
 
 Start all dependent services using docker-compose (this will start PostgreSQL, Elasticsearch, RabbitMQ and Redis):
@@ -30,13 +43,13 @@ Make sure you have [enough virtual memory](https://www.elastic.co/guide/en/elast
 Bootstrap the instance (this will install all Python dependencies and build all static assets):
 
 ```bash
-./scripts/bootstrap
+(invenioils)$ ./scripts/bootstrap
 ```
 
 Next, create database tables, search indexes, message queues and demo data:
 
 ```bash
-./scripts/setup
+(invenioils)$ ./scripts/setup
 ```
 
 The previous step created a set of demo data that allows to try the product.
@@ -54,37 +67,25 @@ You can find the list of demo users in the homepage of InvenioILS when you run i
 Since the InvenioILS web server is running on a different HTTP port (`:5000`) of the UI web server (`:3000`), we will have to tune Invenio configuration
 to allow HTTP requests from different domain (CORS). To do that, we override the default configuration via the `invenio.cfg` file:
 
-Navigate to your virtualenv, e.g. `~/.virtualenvs/invappils/var/instance`, and create a new file `invenio.cfg`:
-
-```python
-CORS_SEND_WILDCARD = False
-CORS_SUPPORTS_CREDENTIALS = True
-```
-
-If you re-run the `setup` script and re-generate the demo data, you will have to update this value.
-
-!!! note
-Do not forget to restart the InvenioILS backend webserver if already running.
-
-<http://localhost:3000/backoffice/locations>
-
-#### Enable CSRF for development
-
-If you have enabled the csrf check during development, you need to follow one of the below steps in order to be able to make it work:
-
-1. Start the UI application [react-invenio-app-ils](https://github.com/inveniosoftware/react-invenio-app-ils) app with the command `npm run start:secure`. This will run the react application over `https` and the csrf cookie will be set corectly.
-
-2. In case you run the UI application over `http` then you will need to add in the [config.py](https://github.com/inveniosoftware/invenio-app-ils/blob/master/invenio_app_ils/config.py) file of invenio-app-ils the following:
+1. Navigate to your virtualenv, e.g. `~/.virtualenvs/invenioils/`
+2. create the needed folders: `mkdir -p var/instance`
+3. create a new file `invenio.cfg` with the following content:
 
 ```bash
-    CSRF_FORCE_SECURE_REFERRER = False
-    SESSION_COOKIE_SECURE = False
+CORS_SUPPORTS_CREDENTIALS=True
 ```
 
-### UI frontend
+### Install UI frontend
 
 Clone the project repository from GitHub: <https://github.com/inveniosoftware/react-invenio-app-ils>.
-Then, install the `npm` dependencies.
+
+```bash
+cd <my directory e.g. myprojects>
+git clone https://github.com/inveniosoftware/react-invenio-app-ils invenioilsui
+cds invenioilsui
+```
+
+Then, install the JavaScript dependencies.
 
 ```bash
 npm install
@@ -92,56 +93,67 @@ npm install
 
 ## Run
 
-The easiest way to run and develop is to run separately Invenio, for REST APIs, and the UI app using the npm web development server.
+Every time you want to run InvenioILS, you will need to:
 
-### Invenio backend
+1. have the Docker services up and running
+2. have the InvenioILS backend development web server and celery workers running
+3. have the InvenioILS UI development web server running
 
-Start the Invenio backend web server (remember to have the virtualenv activated):
+### Run docker
 
-```bash
-cd invenio-app-ils
-./scripts/server
-```
-
-Start the celery worker:
+In a new terminal run:
 
 ```bash
-celery worker -A invenio_app.celery -l INFO
+cd <my directory e.g. myprojects>/invenioils
+docker-compose up
 ```
 
-### UI
+### Run backend web server
+
+Start the Invenio backend web server (remember to activate the virtualenv with the command `workon`). In a new terminal run:
+
+```bash
+cd <my directory e.g. myprojects>/invenioils
+workon invenioils
+(invenioils)$ ./scripts/server
+```
+
+Start the celery worker. In a new terminal run:
+
+```bash
+cd <my directory e.g. myprojects>/invenioils
+workon invenioils
+(invenioils)$ celery worker -A invenio_app.celery -l INFO
+```
+
+### Run frontend web server
 
 The user interface is a single page React application created using [create-react-app](https://facebook.github.io/create-react-app/).
+ In a new terminal run:
 
 ```bash
-cd react-invenio-app-ils
+cd <my directory e.g. myprojects>/invenioilsui
 npm start
 ```
 
-## Testing
+Now visit https://127.0.0.1:3000. You should now see the InvenioILS website.
 
-Run the backend tests, run:
+## Recreate the demo data from scratch
 
-```bash
-./run-tests.sh
-```
+You can recreate the demo data whenever you need. WARNING: this process will destroy any data or user that you have created or modified.
 
-For the frontend tests:
-
-```bash
-cd ui
-npm test
-```
-
-## Developers documentation
-
-You can build the documentation with:
+1. Make sure all services are up and running
+2. Run again `./scripts/server` in your virtualenv:
 
 ```bash
-python setup.py build_sphinx
+cd <my directory e.g. myprojects>/invenioils
+workon invenioils
+(invenioils)$ ./scripts/setup
 ```
 
-## Vocabularies
+## Advanced topics
+
+### Vocabularies
 
 Vocabularies are indexed using Elasticsearch and can be indexed from a JSON
 source file. To manage vocabularies use the `ils vocabulary` CLI.
@@ -176,7 +188,7 @@ Example vocabularies are available in `invenio_app_ils/vocabularies/data`.
 
 Vocabulary-specific configuration is available in `config.py` and `invenioConfig.js`.
 
-## Develop React-invenio-app-ils as a npm linked library
+### Develop React-invenio-app-ils as a npm linked library
 
 1. Setup react-invenio-app-ils ready for development
 
@@ -220,16 +232,11 @@ Verify if:
 
 1. The backend server is running correctly (the console showing no exceptions)
 2. You have followed the installation guide
-3. the CORS policy is disabled for your local instance (not for any production environments!): [check backend installation tutorial](###Invenio backend)
-4. your browser has the exception for the https temporary certificate of the local instance.
+3. the CORS policy is disabled for your local instance (not for any production environments!), see documentation above
+4. your browser has the exception for the https temporary certificate of the local instance, see documentation below
 
-#### Adding the certificate to the browser exceptions:
+#### Adding the certificate to the browser exceptions
 
-1. In your browser go to:
-   `localhost:5000/`
+1. In your browser go to https://127.0.0.1:5000
 2. You will see a warning about the certificate. You need to proceed to the website and agree for adding the certificate to the exceptions
-3. Reload your UI.
-
-## Demo data
-
-TODO
+3. Reload your UI
