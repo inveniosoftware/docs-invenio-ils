@@ -22,7 +22,7 @@ Clone the project repository from GitHub <https://github.com/inveniosoftware/inv
 ```bash
 cd <my directory e.g. myprojects>/invenioils
 git clone https://github.com/inveniosoftware/invenio-app-ils invenioils
-cds invenioils
+cd invenioils
 ```
 
 Create a new Python `virtualenv`:
@@ -81,7 +81,7 @@ Clone the project repository from GitHub: <https://github.com/inveniosoftware/re
 ```bash
 cd <my directory e.g. myprojects>
 git clone https://github.com/inveniosoftware/react-invenio-app-ils invenioilsui
-cds invenioilsui
+cd invenioilsui
 ```
 
 Then, install the JavaScript dependencies.
