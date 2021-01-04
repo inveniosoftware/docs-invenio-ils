@@ -26,14 +26,26 @@
   display: none;
 }
 
-.md-logo {
+/* LOGO */
+.md-header-nav__button.md-logo {
   padding-top: 0.3rem;
 }
 
-.md-logo img {
+.md-header-nav__button.md-logo img {
   width: 131px;
   height: 30px;
 }
+/* //LOGO */
+
+/* SEARCH BAR */
+[data-md-color-primary="white"] .md-search__input + .md-search__icon {
+  color: white;
+}
+
+[data-md-color-primary="white"] .md-search__input::placeholder {
+  color: white;
+}
+/* //SEARCH BAR */
 
 .md-footer {
   border-top: 0.05rem solid #ffffff;

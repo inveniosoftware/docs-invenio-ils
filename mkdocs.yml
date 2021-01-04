@@ -8,7 +8,7 @@ repo_name: docs-invenio-ils
 repo_url: https://github.com/inveniosoftware/docs-invenio-ils
 
 # Copyright
-copyright: Copyright &copy; 2020 CERN
+copyright: Copyright &copy; 2021 CERN
 
 # Configuration
 theme:
@@ -22,24 +22,26 @@ theme:
   favicon: assets/images/favicon.png
 
 nav:
-  - Introduction: index.md
-  - Quickstart: quickstart.md
-  - Data model:
-    - Understanding data model: data_model.md
-    - Records relations: record_relations.md
-  - Managing access: access_and_restrictions.md
-  - Miscellaneous:
-      - Static pages: static_pages.md
-      - User anonymization: anonymization.md
+  - Home: index.md
+  - Preview: preview.md
+  - Customize:
+    - Local development: customize/develop.md
+    - Static pages: customize/static_pages.md
+    - User anonymization: customize/anonymization.md
+    - Vocabularies: customize/vocabularies.md
+  - Reference:
+    - Understanding data model: reference/data_model.md
+    - Records relations: reference/record_relations.md
+    - Managing access: reference/access_and_restrictions.md
 
 # Customization
 extra:
   social:
-  - type: github
+  - icon: fontawesome/brands/github
     link: https://github.com/inveniosoftware
-  - type: twitter
+  - icon: fontawesome/brands/twitter
     link: https://twitter.com/inveniosoftware
-  - type: globe
+  - icon: fontawesome/solid/globe
     link: https://inveniosoftware.org/products/ils/
 extra_css:
   - assets/stylesheets/extra.css
