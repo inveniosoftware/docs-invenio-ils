@@ -48,11 +48,15 @@ docker-compose -f docker-compose.full.yml up
 Now generate the demo data. This step has to been done *only the first time* or if the Docker containers have been destroyed. In a new terminal, run a shell inside the Invenio container and execute the `setup` script:
 
 ```shell
-docker exec -it invenio-app-ils_backend_1 /bin/bash
+docker exec -it invenioils_backend_1 /bin/bash
 invenio@e34cadf4b303:/opt/invenio_app_ils/src$ ./scripts/setup
 ```
 
-InvenioILS should be now running. Open your browser at the address https://127.0.0.1/ and accept self-signed certificate warning.
+!!! note
+    If you get the error `No such container: invenioils_backend_1`, then it means the container name is different.
+    Just run `docker ps` and find the container name under the `Names` column.
+
+InvenioILS should be now running. Open your browser at the address [https://127.0.0.1/](https://127.0.0.1/) and **accept self-signed certificate warning**.
 
 ![Homepage Preview](assets/images/preview-homepage.png)
 
