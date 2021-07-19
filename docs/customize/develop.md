@@ -126,7 +126,7 @@ Now visit https://127.0.0.1:3000 (accept the self-signed certificate warning if 
 ```bash
 cd <react-invenio-app-ils dir>
 npm install
-npm run build
+npm run lib-build 
 ```
 
 2. Link the distribution (the scripts are already provided in package.json)
