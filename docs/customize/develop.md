@@ -104,7 +104,7 @@ Start the celery worker. In a new terminal run:
 ```bash
 cd <my directory e.g. myprojects>/invenioils/invenioils
 workon invenioils
-(invenioils)$ celery worker -A invenio_app.celery -l INFO
+(invenioils)$ celery -A invenio_app.celery worker -l INFO
 ```
 
 ### Run frontend web server
@@ -126,7 +126,7 @@ Now visit https://127.0.0.1:3000 (accept the self-signed certificate warning if 
 ```bash
 cd <react-invenio-app-ils dir>
 npm install
-npm run lib-build 
+npm run lib-build
 ```
 
 2. Link the distribution (the scripts are already provided in package.json)
