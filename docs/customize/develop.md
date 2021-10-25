@@ -12,7 +12,7 @@ The installation process is composed of two parts: install and run the Invenio b
 Make sure that you have installed the prerequisites above. You will now need to install:
 
 * Python 3, at the moment we are using Python 3.6.
-* [virtualenv](https://virtualenv.pypa.io/en/stable/installation.html#via-pip)) and [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/install.html).
+* [virtualenv](https://virtualenv.pypa.io/en/stable/installation.html#via-pip) and [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/install.html).
 * [NodeJS](https://nodejs.org/en/download/) latest LTS release.
 
 ## Install
@@ -117,7 +117,7 @@ cd <my directory e.g. myprojects>/invenioils/invenioilsui
 npm start
 ```
 
-Now visit https://127.0.0.1:3000 (accept the self-signed certificate warning if proposed). You should now see the InvenioILS website.
+Now visit [https://127.0.0.1:3000](https://127.0.0.1:3000) (accept the self-signed certificate warning if proposed). You should now see the InvenioILS website.
 
 #### Develop React-invenio-app-ils as a npm linked library
 
