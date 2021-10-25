@@ -183,6 +183,6 @@ Verify if:
 
 The development server does not provide a valid HTTPS certificate. When opening the webpage of InvenioILS the first time, the browser will show you a warning: this is normal and expected for a local development environment.
 
-1. In your browser go to https://127.0.0.1:5000
+1. In your browser go to [https://127.0.0.1:5000](https://127.0.0.1:5000).
 2. You will see a warning about the invalid certificate: at this step, you will have to add the development certificate as trusted (`Accept` button or `Proceed to 127.0.0.1 (unsafe)` link). This process varies depending on the browser.
 3. Reload the webpage if needed.
