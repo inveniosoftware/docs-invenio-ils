@@ -12,10 +12,11 @@ To help with that the following commands are available:
   The current requests this user has made will be canceled.
   If the user has active loans then the process will abort, those will have to be canceled manually.
 
-  Note that this process is **irreversible** and the patron will permanently lose access to their account.
-  The command can be provided an optional `--force` argument to delete any remaining data (even if the user row is not present in the database).
+  A confirmation dialog is presented before applying the procedure.
 
-  A confirmation dialog is presented before applying the procedure. 
+  !!! warning
+    Note that this process is **irreversible** and the patron will permanently lose access to their account.
+    The command can be provided an optional `--force` argument to delete any remaining data (even if the user row is not present in the database).
 
 Both commands take a mandatory argument `--patron-pid`.
 These commands are also available as functions in the framework.
