@@ -13,7 +13,7 @@ Make sure that you have installed the prerequisites above. You will now need to 
 
 * Python 3, at the moment we are using Python 3.6.
 * [virtualenv](https://virtualenv.pypa.io/en/stable/installation.html#via-pip) and [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/install.html).
-* [NodeJS](https://nodejs.org/en/download/) latest LTS release.
+* [NodeJS](https://nodejs.org/en/download/) versions 12 or 14.
 
 ## Install
 
