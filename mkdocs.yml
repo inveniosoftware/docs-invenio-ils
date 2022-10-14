@@ -33,6 +33,10 @@ nav:
     - Understanding data model: reference/data_model.md
     - Records relations: reference/record_relations.md
     - Managing access: reference/access_and_restrictions.md
+    - Scaffold: reference/scaffold.md
+    - CLI: reference/cli.md
+  - Contribute:
+    - ILS development: contribute/ils_development.md
 
 # Customization
 extra:
