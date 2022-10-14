@@ -12,7 +12,7 @@ You can have a quick look to InvenioILS by running a demo instance.
 
 ## Customize
 
-Customization of InvenioILS requires to change configuration or small development. See the related documentation.
+Customization of InvenioILS requires a bunch of steps to be performed. See the related documentation.
 
 [> Develop with InvenioILS](customize/develop.md)
 
@@ -21,4 +21,10 @@ Customization of InvenioILS requires to change configuration or small developmen
 To understand the main concepts and workflow of InvenioILS, see the reference section.
 
 [> Reference](reference/data_model.md)
+
+## Contribute
+
+Consists of some useful tips that you might need to know while contributing to InvenioILS.
+
+[> Contribute](contribute/ils_development.md)
 
