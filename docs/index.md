@@ -4,6 +4,11 @@ InvenioILS is a modern Integrated Library System based on the Invenio digital re
 
 This documentation will explain you the main concepts of InvenioILS and how to preview and customize it.
 
+!!! note
+    InvenioILS has not been released as a stable version yet, due to the lack of complete documentation.
+
+    However, it is used in production at CERN since 2021.
+
 ## Preview
 
 You can have a quick look to InvenioILS by running a demo instance.
