@@ -36,7 +36,7 @@ Scaffold your InvenioILS instance. Replace `<version>` with the version you want
 ```
 invenio-cli init ils
 # or:
-invenio-cli init ils -c v1.0.0rc.1
+invenio-cli init ils -c v1.0.0rc1
 ```
 
 You will be asked several questions. If in doubt, choose the default.
@@ -66,10 +66,10 @@ FLASK_ENV=development pipenv run invenio run --cert docker/backend/test.crt --ke
 If this is not the desired behaviour, you can by-pass it by:
 
   1. Changing `REACT_APP_INVENIO_UI_URL` and `REACT_APP_INVENIO_REST_ENDPOINTS_BASE_URL` variables in `ui/.env` file to run on `http` instead of `https`.
-  2. Running the server without specifying the certificate: `FLASK_ENV=development invenio run`
+  2. Running the server without specifying the certificate: `FLASK_ENV=development pipenv run invenio run`
 
 
-Start the celery worker. In a new terminal run:
+Start the celery worker. In a new terminal, make sure you are in the project folder (`my-site`) then run:
 
 ```bash
 pipenv run celery -A invenio_app.celery worker -l INFO
