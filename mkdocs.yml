@@ -15,9 +15,7 @@ theme:
   name: material
   palette:
     primary: white
-  font:
-    text: Open Sans
-    code: Roboto Mono
+  font: false
   logo: assets/images/logo-ils.png
   favicon: assets/images/favicon.png
 
