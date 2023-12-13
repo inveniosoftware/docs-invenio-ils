@@ -22,26 +22,17 @@ Every time you want to run InvenioILS, you will need to:
 3. have the InvenioILS UI development web server running
 
 
-#### 1. Check requirements
-To begin with, you can check if the proper requirements are installed via `invenio-cli`:
-
-```console
-invenio-cli check-requirements --development
-```
-
-#### [2. Scaffold project](../reference/scaffold.md)
+#### [1. Scaffold project](../reference/scaffold.md)
 
 Scaffold your InvenioILS instance. Replace `<version>` with the version you want to install:
 
 ```
-invenio-cli init ils
-# or:
-invenio-cli init ils -c v1.0.0rc1
+invenio-cli init ils -c v1.0.0rc4
 ```
 
 You will be asked several questions. If in doubt, choose the default.
 
-#### 3. Start all dependent services using docker-compose
+#### 2. Start all dependent services using docker-compose
 This will start PostgreSQL, Elasticsearch, RabbitMQ and Redis:
 
 ```console
@@ -49,7 +40,7 @@ cd my-site/
 docker-compose up -d
 ```
 
-#### 4. Build, setup and run backend part
+#### 3. Build, setup and run backend part
 ```console
 # make sure that you have the right version of `setuptools`
 pipenv run pip install "setuptools>=57.0.0,<58.0.0"
@@ -69,13 +60,13 @@ If this is not the desired behaviour, you can by-pass it by:
   2. Running the server without specifying the certificate: `FLASK_ENV=development pipenv run invenio run`
 
 
-Start the celery worker. In a new terminal, make sure you are in the project folder (`my-site`) then run:
+In a new terminal, start the celery worker. Make sure you are in the project folder (`my-site`) then run:
 
 ```bash
 pipenv run celery -A invenio_app.celery worker -l INFO
 ```
 
-#### 5. Install UI dependencies
+#### 4. Install UI dependencies
 Open a separate command line and install the JavaScript dependencies:
 
 ```console
@@ -83,14 +74,14 @@ cd my-site/ui
 npm install
 ```
 
-#### 6. Run frontend web server
+#### 5. Run frontend web server
 ```console
 npm start
 ```
 
 Now visit [https://127.0.0.1:3000](https://127.0.0.1:3000) (accept the self-signed certificate warning if proposed). You should now see the InvenioILS website.
 
-#### 7. Stop it
+#### 6. Stop it
 When you are done, you can stop your instance and optionally destroy the containers:
 
 To just stop the containers:
