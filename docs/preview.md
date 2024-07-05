@@ -21,19 +21,29 @@ $ docker-compose --version
 docker-compose version 1.27.4, build 40524192
 ```
 
-Now, clone the project repository from GitHub <https://github.com/inveniosoftware/invenio-app-ils>:
+## [Setup](../reference/scaffold.md)
+
+Now, install InvenioCLI tool which will be used to scaffold your InvenioILS instance:
 
 ```shell
-cd <my directory e.g. myprojects>/invenioils
-git clone https://github.com/inveniosoftware/invenio-app-ils invenioils
-cd invenioils
+pip install -U invenio-cli
 ```
+
+Generate your Invenio ILS instance. Replace `<version>` with the version you want to install
+
+```shell
+invenio-cli init ils -c v4.0.0rc1
+```
+
+You will be asked several questions. If in doubt, choose the default.
+The default project folder name is `my-site` but it is customizable while scaffolding the project.
 
 ## Run
 
-Make sure that you have completed the steps above. Then, in a new terminal, run docker-compose:
+Make sure that you have completed the steps above. Then, in a new terminal, to start all dependent services run docker-compose:
 
 ```shell
+cd my-site
 docker-compose -f docker-compose.full.yml up
 ```
 
@@ -48,12 +58,12 @@ docker-compose -f docker-compose.full.yml up
 Now generate the demo data. This step has to been done *only the first time* or if the Docker containers have been destroyed. In a new terminal, run a shell inside the Invenio container and execute the `setup` script:
 
 ```shell
-docker exec -it invenioils_backend_1 /bin/bash
-invenio@e34cadf4b303:/opt/invenio_app_ils/src$ ./scripts/setup
+docker exec -it my-site-backend-1 /bin/bash
+invenio@e34cadf4b303:/opt/invenio/src$ invenio-cli services setup
 ```
 
 !!! note
-    If you get the error `No such container: invenioils_backend_1`, then it means the container name is different.
+    If you get the error `No such container: my-site-backend-1`, then it means the container name is different.
     Just run `docker ps` and find the container name under the `Names` column.
 
 InvenioILS should be now running. Open your browser at the address [https://127.0.0.1/](https://127.0.0.1/) and **accept self-signed certificate warning**.
