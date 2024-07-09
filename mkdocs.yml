@@ -33,6 +33,19 @@ nav:
     - Managing access: reference/access_and_restrictions.md
     - Scaffold: reference/scaffold.md
     - CLI: reference/cli.md
+    - REST API:
+      - Overview: reference/api/index.md
+      - Document API: reference/api/document.md
+      - Series API: reference/api/series.md
+      - Item API: reference/api/item.md
+      - Loan API: reference/api/loan.md
+      - E-Item API: reference/api/eitem.md
+      - Patron API: reference/api/patron.md
+      - Document Request API: reference/api/document_request.md
+      - Borrowing Request API: reference/api/borrowing_request.md
+      - Acquisition API: reference/api/acquisition.md
+      - Location API: reference/api/location.md
+      - Provider API: reference/api/provider.md
   - Contribute:
     - ILS development: contribute/ils_development.md
 

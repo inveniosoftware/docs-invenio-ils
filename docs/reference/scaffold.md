@@ -8,18 +8,18 @@ First, we need to create the project - the necessary files and folders for your 
 
 The CLI will require the following data:
 
-- **Project name**: Title of your project with space allowed (project name for humans)
-- **Project short name**: Hyphenated and lowercased title (project name for machines)
-- **Project website**: URL where the project will be deployed
+    - **Project name**: Title of your project with space allowed (project name for humans)
+    - **Project short name**: Hyphenated and lowercased title (project name for machines)
+    - **Project website**: URL where the project will be deployed
 - **GitHub repository**: Repository in format `<owner>/<code repository>`
-- **Description**: Short description of project
+    - **Description**: Short description of project
 - **Author name**: Your name or that of your organization
 - **Author email**: Email for communication
 - **Year**: The current year
 - **Python version**: 3.7 (default), 3.7, 3.8, or 3.9.
-- **Database**: PostgreSQL.
-- **Elasticsearch version**: 7.
-- **Storage backend**: Local file system.
+    - **Database**: PostgreSQL.
+    - **Elasticsearch version**: 7.
+    - **Storage backend**: Local file system.
 
 It will also generate a test private key which is needed for SSL support in the development server.
 
