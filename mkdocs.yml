@@ -27,6 +27,7 @@ nav:
     - Static pages: customize/static_pages.md
     - User anonymization: customize/anonymization.md
     - Vocabularies: customize/vocabularies.md
+    - Configure: customize/configure.md
   - Reference:
     - Understanding data model: reference/data_model.md
     - Records relations: reference/record_relations.md
