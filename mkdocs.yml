@@ -46,6 +46,17 @@ nav:
       - Acquisition API: reference/api/acquisition.md
       - Location API: reference/api/location.md
       - Provider API: reference/api/provider.md
+  - Features:
+    - Fast, Responsive User Interface: features/user_interface.md
+    - Scalable, Optimised. Fast Search: features/search.md
+    - Loan Circulation: features/circulation.md
+    - Multiple Media Types: features/media_types.md
+    - Librarian Management Interface: features/librarian_management.md
+    - Interlibrary Loans: features/interlibrary_loans.md
+    - Purchase Management Interface: features/purchase_management.md
+    - Customisations: features/customisations.md
+    - Statistics: features/statistics.md
+    - Self-Checkout: features/self_checkout.md
   - Contribute:
     - ILS development: contribute/ils_development.md
   - Deploy:
