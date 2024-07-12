@@ -26,6 +26,7 @@ nav:
     - Local development: customize/develop.md
     - Static pages: customize/static_pages.md
     - User anonymization: customize/anonymization.md
+    -  Adding Users to the instance: customize/users.md
     - Vocabularies: customize/vocabularies.md
   - Reference:
     - Understanding data model: reference/data_model.md
