@@ -48,6 +48,9 @@ nav:
       - Provider API: reference/api/provider.md
   - Contribute:
     - ILS development: contribute/ils_development.md
+  - Deploy:
+    - Infrastructure: deploy/infrastructure.md
+    - Deployment: deploy/deployment.md
 
 # Customization
 extra:
