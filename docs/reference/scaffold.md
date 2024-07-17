@@ -31,7 +31,7 @@ invenio-cli init ils -c <version>
 
 Where ``<version>`` should be replaced with the version you want to install, e.g.:
 ``` bash
-invenio-cli init ils -c v4.0.0rc1
+invenio-cli init ils -c v4.0.0
 ```
 
 ``` console
