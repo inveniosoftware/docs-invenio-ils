@@ -1,6 +1,6 @@
 # Borrowing Requests API
 
-This document outlines the API endpoints available for managing borrowing requests in Invenio ILS.
+This document outlines the API endpoints available for managing borrowing requests in InvenioILS.
 
 * **List Borrowing Requests**
 

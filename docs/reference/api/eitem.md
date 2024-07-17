@@ -1,6 +1,6 @@
 # E-Item API
 
-This document outlines the API endpoints available for managing e-items in Invenio ILS.
+This document outlines the API endpoints available for managing e-items in InvenioILS.
 
 * **List E-Items**
 

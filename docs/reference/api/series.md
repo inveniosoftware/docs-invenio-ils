@@ -1,6 +1,6 @@
 # Series API
 
-This document outlines the API endpoints available for managing series in Invenio ILS.
+This document outlines the API endpoints available for managing series in InvenioILS.
 
 * **List Series**
 

@@ -1,6 +1,6 @@
 # Document API
 
-This document outlines the API endpoints available for managing documents in Invenio ILS.
+This document outlines the API endpoints available for managing documents in InvenioILS.
 
 * **List Documents**
 

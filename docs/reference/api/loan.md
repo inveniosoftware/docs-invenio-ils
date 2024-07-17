@@ -1,6 +1,6 @@
 # Loan API
 
-This document outlines the API endpoints available for managing loans in Invenio ILS.
+This document outlines the API endpoints available for managing loans in InvenioILS.
 
 * **List Loans**
 

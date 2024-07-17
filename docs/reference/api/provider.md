@@ -1,6 +1,6 @@
 # Provider API
 
-This document outlines the API endpoints available for managing providers in Invenio ILS.
+This document outlines the API endpoints available for managing providers in InvenioILS.
 
 * **List Providers**
 

@@ -1,6 +1,6 @@
 # Patron API
 
-This document outlines the API endpoints available for managing patrons in Invenio ILS.
+This document outlines the API endpoints available for managing patrons in InvenioILS.
 
 * **List Patrons**
 
