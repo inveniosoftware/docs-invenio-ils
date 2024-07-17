@@ -1,10 +1,10 @@
-# Purchase Management Interface
+# Purchase management interface
 
-Invenio ILS simplifies the acquisition process, providing a comprehensive purchase management interface.
+InvenioILS simplifies the acquisition process, providing a comprehensive purchase management interface for the use of librarians.
 
-## Order Management
+## Order management
 
-Libraries can efficiently manage their purchase orders, track expenditures, and maintain records of all acquisitions. This ensures that budgeting and procurement processes are smooth and well-documented.
+Libraries can efficiently manage their purchase orders, and maintain records of all acquisitions. This ensures procurement processes are smooth and well-documented.
 
 ![Purchase Orders](/assets/images/features/purchase-orders.png)
 

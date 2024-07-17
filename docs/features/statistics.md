@@ -1,14 +1,14 @@
 # Statistics
 
-Invenio ILS provides valuable tools for analyzing library operations and user interactions.
+InvenioILS provides valuable tools for analyzing library operations and user interactions.
 
-## Circulation Stats
+## Circulation stats
 
-Detailed statistics on item circulation help librarians understand borrowing patterns and make informed decisions about their collections. These insights are crucial for collection development and management.
+Statistics on most loaned books in a given period of time help librarians understand borrowing patterns. These insights are helpful for catalogue management.
 
 ![Loan Stats](/assets/images/features/most-loaned.png)
 
-## User Views and Downloads
+## User views and downloads
 
 Tracking how users interact with digital resources, including views and downloads, provides insights into user behavior and resource popularity. This data helps in making informed decisions about digital resource management.
 
