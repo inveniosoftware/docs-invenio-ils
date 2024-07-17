@@ -1,38 +1,6 @@
 # Configuration Variables
 
-This document provides a comprehensive list and explanation of the configuration variables available in the `invenio-app-ils` backend. These variables can be set in the configuration file(s) to customize the behavior of your Invenio ILS application.
-
-## REST Configurations
-
-### `ILS_RECORDS_REST_ENDPOINTS`
-
-REST endpoints for various record types.
-
-```python
-ILS_RECORDS_REST_ENDPOINTS = {
-    'books': {
-        'pid_type': 'bookid',
-        'path': '/books',
-        'default_media_type': 'application/json',
-    },
-    'members': {
-        'pid_type': 'memberid',
-        'path': '/members',
-        'default_media_type': 'application/json',
-    },
-}
-```
-
-### `ILS_MAILS_TEMPLATES`
-
-Paths to email templates used for various notifications.
-
-```python
-ILS_MAILS_TEMPLATES = {
-    'loan_due': 'invenio_app_ils/loans/email/loan_due.html',
-    'loan_overdue': 'invenio_app_ils/loans/email/loan_overdue.html',
-}
-```
+This document provides a comprehensive list and explanation of the configuration variables available in the [invenio-app-ils](https://github.com/inveniosoftware/invenio-app-ils) module. These variables can be set in the configuration file(s) to customize the behavior of your InvenioILS application.
 
 ## Circulation Configuration
 
@@ -58,40 +26,6 @@ For detailed documentation for circulation sub-module, refer to [invenio-circula
 
 Enable or disable debugging mode.
 
-### DEBUG_TB_ENABLED (True/False)
-
-Enable or disable the debug toolbar.
-
-### DEBUG_TB_INTERCEPT_REDIRECTS (True/False)
-
-Enable or disable intercepting redirects in the debug toolbar.
-
-## Rate Limiting Configuration
-
-### RATELIMIT_STORAGE_URL
-
-Storage URL for the rate limiter.
-
-```python
-RATELIMIT_STORAGE_URL = "redis://localhost:6379/3"
-```
-
-### RATELIMIT_AUTHENTICATED_USER
-
-Rate limit for authenticated users.
-
-```python
-RATELIMIT_AUTHENTICATED_USER = "5000 per hour;150 per minute"
-```
-
-### RATELIMIT_GUEST_USER
-
-Rate limit for non-authenticated users.
-
-```python
-RATELIMIT_GUEST_USER = "1000 per hour;100 per minute"
-```
-
 ## Internationalization (I18N) Configuration
 
 ### BABEL_DEFAULT_LANGUAGE
@@ -102,6 +36,8 @@ Default language setting.
 BABEL_DEFAULT_LANGUAGE = "en"
 ```
 
+> **Disclamer:** The software currently is available only in ENGLISH.
+
 ### BABEL_DEFAULT_TIMEZONE
 
 Default timezone setting.
@@ -110,117 +46,9 @@ Default timezone setting.
 BABEL_DEFAULT_TIMEZONE = "Europe/Zurich"
 ```
 
-## Notifications Configuration
-
-### ILS_NOTIFICATIONS_BACKENDS_BUILDER
-
-Factory function to use when sending notifications.
-
-```python
-ILS_NOTIFICATIONS_BACKENDS_BUILDER = (
-    "invenio_app_ils.notifications.backends:notifications_backend_builder"
-)
-```
-
-### ILS_NOTIFICATIONS_MSG_BUILDER
-
-Notification message creator.
-
-```python
-ILS_NOTIFICATIONS_MSG_BUILDER = (
-    "invenio_app_ils.notifications.messages:notification_msg_builder"
-)
-```
-
-### ILS_NOTIFICATIONS_TEMPLATES
-
-Override default global common templates.
-
-```python
-ILS_NOTIFICATIONS_TEMPLATES = {"footer": "footer.html"}
-```
-
-### ILS_NOTIFICATIONS_MSG_BUILDER_DOCUMENT_REQUEST
-
-Notification message creator for document requests notifications.
-
-```python
-ILS_NOTIFICATIONS_MSG_BUILDER_DOCUMENT_REQUEST = "invenio_app_ils.document_requests.notifications.messages:notification_document_request_msg_builder"
-```
-
-### ILS_NOTIFICATIONS_TEMPLATES_DOCUMENT_REQUEST
-
-Override default document requests templates.
-
-```python
-ILS_NOTIFICATIONS_TEMPLATES_DOCUMENT_REQUEST = {}
-```
-
-### ILS_NOTIFICATIONS_FILTER_DOCUMENT_REQUEST
-
-Function to select and filter which notifications should be sent.
-
-```python
-ILS_NOTIFICATIONS_FILTER_DOCUMENT_REQUEST = document_request_notification_filter
-```
-
-## Email Configuration
-
-### SUPPORT_EMAIL
-
-Email address for support.
-
-```python
-SUPPORT_EMAIL = "info@example.com"
-```
-
-### MAIL_SUPPRESS_SEND (True/False)
-
-Disable email sending by default.
-
-### MAIL_NOTIFY_SENDER
-
-Email address for email notification sender.
-
-```python
-MAIL_NOTIFY_SENDER = "noreply@example.com"
-```
-
-### MAIL_NOTIFY_CC (list)
-
-Email CC address(es) for email notifications.
-
-### MAIL_NOTIFY_BCC (list)
-
-Email BCC address(es) for email notifications.
-
-### ILS_MAIL_ENABLE_TEST_RECIPIENTS (True/False)
-
-Enable or disable sending mail to test recipients.
-
-### ILS_MAIL_NOTIFY_TEST_RECIPIENTS (list)
-
-When `ILS_MAIL_ENABLE_TEST_RECIPIENTS` is True, all emails are sent here.
-
-```python
-ILS_MAIL_NOTIFY_TEST_RECIPIENTS = ["john.doe@example.com"]
-```
-
-## Assets Configuration
-
-### COLLECT_STORAGE
-
-Static files collection method (defaults to copying files).
-
-```python
-COLLECT_STORAGE = "flask_collect.storage.file"
-```
-
 ## Accounts Configuration
 
 For accounts configuration, refer to the [flask-security](https://github.com/inveniosoftware/flask-security-fork) and [invenio-accounts](https://invenio-accounts.readthedocs.io/en/latest/) documentation.
-
-Here's the continuation of the comprehensive documentation for the provided Python config file in Markdown format:
 
 ## Celery Configuration
 
@@ -272,17 +100,7 @@ EXTEND_LOANS_SCHEDULE_TIME = datetime.time(2)
 
 ### ILS_SELF_CHECKOUT_ENABLED (True/False)
 
-Enable or disable Self-Checkout feature endpoint.
-
-## Database Configuration
-
-### SQLALCHEMY_DATABASE_URI
-
-Database URI including user and password.
-
-```python
-SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://test:psw@localhost/ils"
-```
+Enable or disable Self-Checkout feature.
 
 ## JSONSchemas Configuration
 
@@ -299,6 +117,12 @@ JSONSCHEMAS_HOST = "127.0.0.1:5000"
 ### REST_CSRF_ENABLED (True/False)
 
 Enable or disable CSRF protection for REST APIs.
+
+---
+
+> **The following configurations are for customizing the way you make your application secure, it is advised to not modify them if in doubt.**
+
+---
 
 ## CORS Configuration
 
@@ -319,6 +143,7 @@ Exable or disable supporting credentials for CORS requests.
 ### SECRET_KEY
 
 Secret key used for session management and CSRF protection.
+**Note:** This variable should store a secure key when your website goes to production!
 
 ### MAX_CONTENT_LENGTH
 
@@ -348,30 +173,6 @@ List of allowed hosts for the application.
 APP_ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 ```
 
-### SPA_HOST
-
-Host URL for Single Page Application.
-
-```python
-SPA_HOST = "https://127.0.0.1:3000"
-```
-
-### SPA_PATHS
-
-Paths and placeholders for Single Page Application routes.
-
-```python
-SPA_PATHS = dict(
-    literature="/literature/%(pid)s",
-    loan="/backoffice/loans",
-    patron="/backoffice/patrons",
-    profile="/profile",
-    search="/search?q=%(querystring)s",
-)
-```
-
-Here's the continuation and completion of the configuration file documentation in Markdown format:
-
 ## Records REST Configuration
 
 ### RECORDS_REST_MAX_RESULT_WINDOW
@@ -390,14 +191,6 @@ Maximum result window for vocabulary Records REST endpoints.
 RECORDS_REST_VOCAB_MAX_RESULT_WINDOW = 500
 ```
 
-### PIDSTORE_RECID_FIELD
-
-Field name in the PID store for the record identifier.
-
-```python
-PIDSTORE_RECID_FIELD = "pid"
-```
-
 ### REST_MIMETYPE_QUERY_ARG_NAME
 
 Name of the URL argument to choose response serializer.
@@ -410,35 +203,15 @@ REST_MIMETYPE_QUERY_ARG_NAME = "format"
 
 Dictionary defining the endpoints for Records REST API.
 
+> The following configurations can be modified if you want to customise the Record behaviour by updating the classes, note that these require some advanced developer experience. You can also customise permissions policy for your resources.
+
 ```python
 RECORDS_REST_ENDPOINTS = {
     "docid": {
-        "pid_type": DOCUMENT_PID_TYPE,
-        "pid_minter": DOCUMENT_PID_MINTER,
-        "pid_fetcher": DOCUMENT_PID_FETCHER,
         "search_class": DocumentSearch,
         "record_class": Document,
         "indexer_class": DocumentIndexer,
         "search_factory_imp": "invenio_app_ils.search_permissions:ils_search_factory",
-        "record_loaders": {
-            "application/json": "invenio_app_ils.documents.loaders:document_loader"
-        },
-        "record_serializers": {
-            "application/json": "invenio_app_ils.literature.serializers:json_v1_response"
-        },
-        "search_serializers": {
-            "application/json": "invenio_app_ils.literature.serializers:json_v1_search",
-            "text/csv": "invenio_app_ils.literature.serializers:csv_v1_search",
-        },
-        "search_serializers_aliases": {
-            "csv": "text/csv",
-            "json": "application/json",
-        },
-        "list_route": "/documents/",
-        "item_route": "/documents/<{0}:pid_value>".format(doc_pid_converter()),
-        "default_media_type": "application/json",
-        "max_result_window": RECORDS_REST_MAX_RESULT_WINDOW,
-        "error_handlers": {},
         "read_permission_factory_imp": record_read_permission_factory,
         "list_permission_factory_imp": allow_all,
         "create_permission_factory_imp": backoffice_permission,
@@ -460,7 +233,7 @@ For a detailed configuration reference, refer to [invenio-records-rest](https://
 
 ### RECORDS_REST_SORT_OPTIONS
 
-Dictionary defining sort options for Records REST endpoints.
+Dictionary defining sort options for Records REST endpoints. Sort options set here will be displayed in the search pages.
 
 ```python
 RECORDS_REST_SORT_OPTIONS = {
@@ -497,7 +270,7 @@ Number of tags to display in the facets.
 
 ### RECORDS_REST_FACETS
 
-Disctionary defining facets for Records REST endpoints.
+Disctionary defining facets (search filters visible on the left hand side of search pages) for Records REST endpoints.
 
 ```python
 dict(
@@ -545,14 +318,6 @@ Permissions factory for ILS views to handle all ILS actions.
 ILS_VIEWS_PERMISSIONS_FACTORY = views_permissions_factory
 ```
 
-### ILS_INDEXER_TASK_DELAY
-
-Trigger delay for celery tasks to index referenced records.
-
-```python
-ILS_INDEXER_TASK_DELAY = timedelta(seconds=2)
-```
-
 ## Stats Configuration
 
 For detailed documentation on stats, refer to [invenio-stats](https://github.com/inveniosoftware/invenio-stats).
@@ -562,6 +327,26 @@ For detailed documentation on stats, refer to [invenio-stats](https://github.com
 ### ILS_VOCABULARIES (list)
 
 List of available vocabularies.
+
+```python
+ILS_VOCABULARIES = [
+    "alternative_title_type",
+    "author_identifier_scheme",
+    "author_type",
+    "country",
+    "currencies",
+    "doc_req_payment_method",
+    "doc_subjects",
+    "eitem_sources",
+    "item_medium",
+    "language",
+    "license",
+    "series_identifier_scheme",
+    "tag",
+]
+```
+
+> You can ceate new vocabularies and them to the list, note that this requires some advanced developer experience.
 
 ### ILS_VOCABULARY_SOURCES
 
@@ -576,46 +361,200 @@ ILS_VOCABULARY_SOURCES = {
 }
 ```
 
-### OPENDEFINITION_JSONRESOLVER_HOST
-
-Host URL for opendefinition license for jsonresolvers.
-
 ### FILES_REST_PERMISSION_FACTORY
 
 Factory function for defining permissions for file upload.
-
-### ILS_RECORDS_EXPLICIT_PERMISSIONS_ENABLED (True/False)
-
-Enable records restrictions by `_access` field.
-
-When enabled, it allows to define explicit permissions for each record to
-provide read access to specific users or roles.
-When disabled, it will avoid checking for user ids and roles on each search
-query and record fetch.
 
 ### ILS_LITERATURE_COVER_URLS_BUILDER
 
 Default implementation for building cover urls in document serializer.
 
-### ILS_RECORDS_METADATA_NAMESPACES
-
-Namespaces for fields added to the metadata schema.
-
 ### ILS_RECORDS_METADATA_EXTENSIONS
 
-Fields added to the metadata schema.
-
-### ILS_PATRON_ANONYMOUS_CLASS and ILS_PATRON_SYSTEM_AGENT_CLASS
-
-Define the class for the Anonymous and SystemAgent patrons.
+Fields added to the metadata schema with the key as the endpoint to add to.
 
 ```python
-ILS_PATRON_ANONYMOUS_CLASS = AnonymousPatron
-ILS_PATRON_SYSTEM_AGENT_CLASS = SystemAgent
+ILS_RECORDS_METADATA_EXTENSIONS = {
+    "document": {
+        "schema": Document._schema,
+        "fields": {
+            "new_field": {
+                "elasticsearch": "long",
+                "marshmallow": Integer(),
+            },
+        },
+    },
+}
+```
+
+## Advanced Configurations
+
+### `ILS_RECORDS_REST_ENDPOINTS`
+
+REST endpoints for various record types.
+
+```python
+ILS_RECORDS_REST_ENDPOINTS = {
+    'books': {
+        'pid_type': 'bookid',
+        'path': '/books',
+        'default_media_type': 'application/json',
+    },
+    'members': {
+        'pid_type': 'memberid',
+        'path': '/members',
+        'default_media_type': 'application/json',
+    },
+}
+```
+
+### `ILS_MAILS_TEMPLATES`
+
+Paths to email templates used for various notifications.
+
+```python
+ILS_MAILS_TEMPLATES = {
+    'loan_due': 'invenio_app_ils/loans/email/loan_due.html',
+    'loan_overdue': 'invenio_app_ils/loans/email/loan_overdue.html',
+}
+```
+
+### ILS_NOTIFICATIONS_MSG_BUILDER_DOCUMENT_REQUEST
+
+Notification message creator for document requests notifications.
+
+```python
+ILS_NOTIFICATIONS_MSG_BUILDER_DOCUMENT_REQUEST = "invenio_app_ils.document_requests.notifications.messages:notification_document_request_msg_builder"
+```
+
+### ILS_NOTIFICATIONS_BACKENDS_BUILDER
+
+Factory function to use when sending notifications.
+
+```python
+ILS_NOTIFICATIONS_BACKENDS_BUILDER = (
+    "invenio_app_ils.notifications.backends:notifications_backend_builder"
+)
+```
+
+### ILS_NOTIFICATIONS_MSG_BUILDER
+
+Notification message creator.
+
+```python
+ILS_NOTIFICATIONS_MSG_BUILDER = (
+    "invenio_app_ils.notifications.messages:notification_msg_builder"
+)
+```
+
+### ILS_NOTIFICATIONS_TEMPLATES_DOCUMENT_REQUEST
+
+Override default document requests templates.
+
+```python
+ILS_NOTIFICATIONS_TEMPLATES_DOCUMENT_REQUEST = {"popup": "popup.html", "header": "header.html"}
+```
+
+### ILS_NOTIFICATIONS_FILTER_DOCUMENT_REQUEST
+
+Function to select and filter which notifications should be sent. Possibility to filter out some emails, based on your needs.
+
+```python
+ILS_NOTIFICATIONS_FILTER_DOCUMENT_REQUEST = document_request_notification_filter
+```
+
+### SUPPORT_EMAIL
+
+Email address for support.
+
+```python
+SUPPORT_EMAIL = "info@example.com"
+```
+
+### MAIL_SUPPRESS_SEND (True/False)
+
+Disable email sending by default.
+
+### MAIL_NOTIFY_SENDER
+
+Email address for email notification sender.
+
+```python
+MAIL_NOTIFY_SENDER = "noreply@example.com"
+```
+
+### MAIL_NOTIFY_CC (list)
+
+Email CC address(es) for email notifications.
+
+### MAIL_NOTIFY_BCC (list)
+
+Email BCC address(es) for email notifications.
+
+### ILS_MAIL_ENABLE_TEST_RECIPIENTS (True/False)
+
+Enable or disable sending mail to test recipients.
+
+### ILS_MAIL_NOTIFY_TEST_RECIPIENTS (list)
+
+When `ILS_MAIL_ENABLE_TEST_RECIPIENTS` is True, all emails are sent here.
+
+```python
+ILS_MAIL_NOTIFY_TEST_RECIPIENTS = ["john.doe@example.com"]
+```
+
+### COLLECT_STORAGE
+
+Static files collection method (defaults to copying files).
+
+```python
+COLLECT_STORAGE = "flask_collect.storage.file"
+```
+
+## Configurations for Website Administrators
+
+### SQLALCHEMY_DATABASE_URI
+
+Database URI including user and password.
+
+```python
+SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://test:psw@localhost/ils"
+```
+
+### RATELIMIT_STORAGE_URL
+
+Storage URL for the rate limiter.
+
+```python
+RATELIMIT_STORAGE_URL = "redis://localhost:6379/3"
+```
+
+### RATELIMIT_AUTHENTICATED_USER
+
+Rate limit for authenticated users.
+
+```python
+RATELIMIT_AUTHENTICATED_USER = "5000 per hour;150 per minute"
+```
+
+### RATELIMIT_GUEST_USER
+
+Rate limit for non-authenticated users.
+
+```python
+RATELIMIT_GUEST_USER = "1000 per hour;100 per minute"
+```
+
+### SPA_HOST
+
+Host URL for Single Page Application.
+
+```python
+SPA_HOST = "https://127.0.0.1:3000"
 ```
 
 ## Notes
 
-- This list includes only a subset of all available configuration variables. For a complete list, refer to the official Invenio App ILS documentation or source code.
+- This list includes only a subset of all available configuration variables. For a complete list, refer to the official InvenioILS documentation or source code.
 - Replace example values with actual values suitable for your instance.
 - Ensure to restart the application after modifying configuration variables for changes to take effect.
