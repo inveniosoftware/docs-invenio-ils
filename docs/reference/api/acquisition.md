@@ -1,6 +1,6 @@
 # Acquisition API
 
-This document outlines the API endpoints available for managing acquisitions in Invenio ILS.
+This document outlines the API endpoints available for managing acquisitions in InvenioILS.
 
 * **List Acquisition Orders**
 

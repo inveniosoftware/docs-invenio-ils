@@ -1,6 +1,6 @@
 # Document Request API
 
-This document outlines the API endpoints available for managing document requests in Invenio ILS.
+This document outlines the API endpoints available for managing document requests in InvenioILS.
 
 * **List Document Requests**
 

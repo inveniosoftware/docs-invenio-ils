@@ -1,6 +1,6 @@
 # Item API
 
-This document outlines the API endpoints available for managing items in Invenio ILS.
+This document outlines the API endpoints available for managing items in InvenioILS.
 
 * **List Items**
 

@@ -1,6 +1,6 @@
 # Location API
 
-This document outlines the API endpoints available for managing library locations in Invenio ILS.
+This document outlines the API endpoints available for managing library locations in InvenioILS.
 
 * **List Locations**
 
