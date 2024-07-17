@@ -27,7 +27,7 @@ Every time you want to run InvenioILS, you will need to:
 Scaffold your InvenioILS instance. Replace `<version>` with the version you want to install:
 
 ```
-invenio-cli init ils -c v4.0.0rc1
+invenio-cli init ils -c v4.0.0
 ```
 
 You will be asked several questions. If in doubt, choose the default.
