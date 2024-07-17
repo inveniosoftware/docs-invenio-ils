@@ -1,9 +1,9 @@
 # Infrastructure architecture
 
-This guide provides a general overview of the Invenio infrastructure
+This guide provides a general overview of the InvenioILS infrastructure
 architecture. It is not meant to be a comprehensive guide for each subsystem.
 
-Over all, the Invenio infrastructure is a pretty standard web application
+Over all, the InvenioILS infrastructure is a pretty standard web application
 infrastructure. It consists of:
 
 - **Load balancers:** HAProxy, Nginx or others.
@@ -33,7 +33,7 @@ traffic into three categories of requests:
 
 - static files requests: e.g. JavaScript assets
 - application requests: e.g. search queries
-- record files requests: e.g. downloading very large files
+- files requests: e.g. downloading files
 
 This way you can dimension the number of connection slots between different types
 of requests according to available resources. For instance a static file
