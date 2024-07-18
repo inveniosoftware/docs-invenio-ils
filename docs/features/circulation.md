@@ -23,7 +23,7 @@ The circulation states in InvenioILS provide clarity on the status of each item:
 
 ## Loan extensions
 
-Users have the option to request extensions on their loans through the system. This ensures they can keep borrowed items for as long as they need them within the library's policies, which are customizable to fit the library's specific needs.
+Users have the option to request extensions on their loans. This ensures they can keep borrowed items for as long as they need them within the library's policies, which are customizable to fit the library's specific needs.
 
 ![Loan Extension](/assets/images/features/loan-extension.png)
 
