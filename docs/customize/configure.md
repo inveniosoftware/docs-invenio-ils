@@ -6,7 +6,7 @@ This document provides a comprehensive list and explanation of the configuration
 
 ### `CIRCULATION_LOAN_TRANSITIONS`
 
-A dictionary defining the possible transitions for loans.
+Defines the possible transitions for loan states. It manages the different stages a loan goes through, from its creation to its return or cancellation.
 
 ```python
 CIRCULATION_LOAN_TRANSITIONS = {
@@ -17,6 +17,50 @@ CIRCULATION_LOAN_TRANSITIONS = {
     'CANCELLED': [],
 }
 ```
+
+#### States and Transitions
+
+- **CREATED**: The initial state when a loan is created. It can transition to:
+
+  - `PENDING`: The loan is awaiting processing or approval.
+
+- **PENDING**: A loan in the pending state can transition to:
+
+  - `ITEM_ON_LOAN`: The item has been checked out by the user.
+  - `CANCELLED`: The loan request has been cancelled.
+
+- **ITEM_ON_LOAN**: When the item is on loan, it can transition to:
+
+  - `RETURNED`: The item has been returned to the library.
+
+- **RETURNED**: Indicates the item has been returned and no further transitions are possible from this state.
+
+- **CANCELLED**: Indicates the loan request was cancelled and no further transitions are possible from this state.
+
+#### Examples for Customization
+
+1. **Adding a Loan in Transit State**: If your library needs to include a state where the item is being transported (e.g., between branches or for delivery), you can add an `IN_TRANSIT` state. You would update the `CIRCULATION_LOAN_TRANSITIONS` dictionary to include this new state and its transitions.
+
+   ```python
+   {...
+       'ITEM_ON_LOAN': ['IN_TRANSIT', 'RETURNED'],
+       'IN_TRANSIT': ['ITEM_ON_LOAN', 'RETURNED'],
+   }
+   ```
+
+   This addition allows loans to transition to an `IN_TRANSIT` state before being marked as returned.
+
+2. **Skipping a Step in the Loan Circulation**: If your library's process does not require the `PENDING` state and you want to move directly from `CREATED` to `ITEM_ON_LOAN`, you can modify the transitions accordingly.
+
+   ```python
+    {...
+       'CREATED': ['ITEM_ON_LOAN'],
+    }
+   ```
+
+   This simplification allows for a simple loan process, skipping the `PENDING` state altogether.
+
+Customizing the loan transitions involves understanding the library's workflow and adjusting the states and transitions to match those requirements.
 
 For detailed documentation for circulation sub-module, refer to [invenio-circulation](https://invenio-circulation.readthedocs.io/en/latest/).
 
@@ -88,7 +132,27 @@ CELERY_BEAT_SCHEDULE = {
 
 ### EXTEND_LOANS_LOCATION_UPDATED (True/False)
 
-Flag to indicate whether to start a task to update active loans when closures of a location are updated.
+Flag to indicate whether to start a task to update active loans when closures of a library location are updated. This feature is ensures that loan periods are correctly adjusted in response to changes in schedules.
+
+```python
+EXTEND_LOANS_LOCATION_UPDATED = True
+```
+
+When set to `True`, this flag triggers a task to extend the due dates of all active loans affected by the updated closure dates of a location.
+
+#### Example
+
+1. **Library Updates Closure Dates**: The library admin updates the closure dates for a specific location due to an upcoming holiday.
+
+2. **Automatic Loan Extension**: With `EXTEND_LOANS_LOCATION_UPDATED` set to `True`, the system detects the change and initiates a task to extend the due dates of all active loans impacted by the closure.
+
+#### Configuration Example
+
+To enable this feature, ensure that the `EXTEND_LOANS_LOCATION_UPDATED` flag is set to `True` in the InvenioILS configuration:
+
+```python
+EXTEND_LOANS_LOCATION_UPDATED = True
+```
 
 ### EXTEND_LOANS_SCHEDULE_TIME
 
@@ -198,6 +262,8 @@ Name of the URL argument to choose response serializer.
 ```python
 REST_MIMETYPE_QUERY_ARG_NAME = "format"
 ```
+
+---
 
 ### RECORDS_REST_ENDPOINTS
 
