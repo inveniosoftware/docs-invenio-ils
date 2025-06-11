@@ -78,6 +78,8 @@ npm start
 
 Now visit [https://127.0.0.1:3000](https://127.0.0.1:3000) (accept the self-signed certificate warning if proposed). You should now see the InvenioILS website.
 
+If requests to the backend are failing, you might have to visit [https://127.0.0.1:5000](https://127.0.0.1:5000) and also there accept the self-signed certificate.
+
 ### 6. Stop it
 When you are done, you can stop your instance and optionally destroy the containers:
 
