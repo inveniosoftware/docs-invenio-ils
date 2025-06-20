@@ -8,16 +8,37 @@ repo_name: docs-invenio-ils
 repo_url: https://github.com/inveniosoftware/docs-invenio-ils
 
 # Copyright
-copyright: Copyright &copy; 2021 CERN
+copyright: Copyright &copy; 2021-2025 CERN and contributors.
 
 # Configuration
 theme:
   name: material
+  custom_dir: theme
   palette:
-    primary: white
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: orange
+      toggle:
+        accent: orange
+        icon: material/brightness-4
+        name: Switch to light mode
   font: false
   logo: assets/images/logo-ils.png
   favicon: assets/images/favicon.png
+  features:
+    - navigation.tabs
+    - navigation.footer
+    - content.code.copy
 
 nav:
   - Home: index.md
@@ -85,3 +106,8 @@ markdown_extensions:
   - pymdownx.snippets
   - toc:
       permalink: true
+
+plugins:
+  - search
+  - glightbox:
+      zoomable: true
