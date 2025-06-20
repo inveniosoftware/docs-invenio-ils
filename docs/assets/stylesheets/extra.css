@@ -15,7 +15,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/assets/st
     --color-white: #ffffff;
     --color-gray: #707070;
     --color-dark-blue: #003258;
-    --color-light-coral: rgba(251, 130, 115, 0.69);
+    --color-invenio-ils: #7be9ff;
 }
 
 [data-md-color-scheme='default'] {
@@ -26,7 +26,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/assets/st
         90deg,
         var(--color-invenio),
         var(--color-invenio) 52.52%,
-        var(--color-light-coral)
+        var(--color-invenio-ils)
     ) no-repeat;
 
     .md-nav__link--active {
@@ -77,7 +77,7 @@ https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/assets/st
             12deg,
             rgba(3, 119, 205, 1),
             rgba(3, 119, 205, 1) 52.52%,
-            rgba(251, 130, 115, 0.69)
+            var(--color-invenio-ils)
         );
     }
 
