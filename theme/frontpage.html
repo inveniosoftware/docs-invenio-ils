@@ -1,0 +1,113 @@
+<!--
+
+ Copyright (C) 2018-2025 CERN.
+ Copyright (C) 2018-2024 Northwestern University.
+ Copyright (C) 2022-2024 KTH Royal Institute of Technology.
+
+ Invenio is free software; you can redistribute it and/or modify it
+ under the terms of the MIT License; see LICENSE file for more details.
+
+-->
+{% extends "main.html" %}
+
+
+{% macro first_url(nav_item) %}
+  {# Returns the first link (if possible) that should be attributed to nav_item.
+
+    In particular, if nav_item contains deeply nested sections before an actual page
+    `first_url` will find the URL for that page.
+  #}
+  {% if nav_item.url %}
+    {% set link = nav_item.url | url %}
+  {% elif nav_item.children %}
+    {% set link = first_url(nav_item.children[0]) %}
+  {% else %}
+    {% set link = "" %}
+  {%endif%}
+  {{ link }}
+{% endmacro %}
+
+
+{% macro render(nav_item, path, level) %}
+  {# Renders the nav_item section: its title and first level subsections #}
+  {% set link = first_url(nav_item) %}
+  {% if nav_item.children and level <= 1 %}
+    <li class="ils-toc-item level{{level}} nested">
+      <div>
+        <a href="{{ link }}">{{ nav_item.title }}</a>
+        <ul>
+          {% for nav_item in nav_item.children %}
+            {{ render(nav_item, path ~ "_" ~ loop.index, level + 1) }}
+          {% endfor %}
+        </ul>
+      </div>
+    </li>
+  {% else %}
+    <li class="ils-toc-item level{{level}}">
+      <div>
+        <a href="{{ link }}">{{ nav_item.title }}</a>
+      </div>
+    </li>
+  {% endif %}
+{% endmacro %}
+
+<!-- Render hero under tabs -->
+{% block tabs %}
+{{ super() }}
+<style>
+  /* Embedded CSS styles to isolate changes to this page only */
+  body[data-md-color-scheme] .md-header {
+    background: transparent;
+    position: static;
+    transform: translateY(0px);
+  }
+
+  body[data-md-color-scheme] .md-tabs {
+    border-bottom: none;
+    background: transparent;
+  }
+</style>
+
+<!-- Hero for landing page -->
+<section class="mdx-container">
+  <div class="ils-hero-bg">
+    <svg
+      class="wave-svg"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1123 258"
+    >
+      <path
+        d="M1124,2c0,0 0,256 0,256l-1125,0l0,-48c0,0 16,5 55,5c116,0 197,-92 325,-92c121,0 114,46 254,46c140,0 214,-167 572,-166Z"
+      />
+    </svg>
+  </div>
+  <div class="ils-hero md-typeset">
+    <img src="assets/images/logo-invenio-ils.svg" />
+    <div class="ils-hero-subtitle">
+        The turn-key research data management repository
+    </div>
+    <a href="/install/" class="md-button md-button--primary">Quick start</a>
+    <a href="https://invenioils.web.cern.ch" class="md-button">Demo site</a>
+  </div>
+</section>
+{% endblock %}
+
+<!-- Content -->
+{% block content %}
+
+{% if "material/tags" in config.plugins and tags %}
+  {% include "partials/tags.html" %}
+{% endif %}
+{% include "partials/actions.html" %}
+{{ page.content }}
+{% include "partials/source-file.html" %}
+<ul class="ils-toc">
+  {% for nav_item in nav %}
+    {%- if nav_item.title != "Home" %}
+      {%- set path = "__nav_" ~ loop.index %}
+      {%- set level = 1 %}
+      {{ render(nav_item, path, level) }}
+    {%- endif %}
+  {% endfor %}
+</ul>
+{% endblock %}

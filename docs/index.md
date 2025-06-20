@@ -1,3 +1,10 @@
+---
+hide:
+  - navigation
+  - toc
+template: frontpage.html
+---
+
 # Welcome to InvenioILS
 
 InvenioILS is a modern Integrated Library System based on the Invenio digital repository web framework.

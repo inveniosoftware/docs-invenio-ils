@@ -1,125 +1,223 @@
-[data-md-color-primary="white"] .md-header {
-  background-image: linear-gradient(
-    12deg,
-    rgba(3, 119, 205, 1),
-    rgba(3, 119, 205, 1) 52.52%,
-    rgba(123, 233, 255, 0.69)
-  );
-  color: #ffffff;
-}
-[data-md-color-primary="white"] .md-tabs {
-  background-image: linear-gradient(
-    12deg,
-    rgba(3, 119, 205, 1),
-    rgba(3, 119, 205, 1) 52.52%,
-    rgba(123, 233, 255, 0.69)
-  );
-  color: #ffffff;
+/*
+ Copyright (C) 2018-2024 CERN.
+ Copyright (C) 2018-2024 Northwestern University.
+ Copyright (C) 2022-2024 KTH Royal Institute of Technology.
+
+ Invenio is free software; you can redistribute it and/or modify it
+ under the terms of the MIT License; see LICENSE file for more details.
+*/
+/* Color variables
+https://github.com/squidfunk/mkdocs-material/blob/master/src/templates/assets/stylesheets/main/_colors.scss
+*/
+:root {
+    --color-invenio: #0377cd;
+    --color-black: #000000;
+    --color-white: #ffffff;
+    --color-gray: #707070;
+    --color-dark-blue: #003258;
+    --color-light-coral: rgba(251, 130, 115, 0.69);
 }
 
-.md-header[data-md-state="shadow"] {
-  box-shadow: none;
-  border-bottom: 0.05rem solid #ffffff;
+[data-md-color-scheme='default'] {
+    --md-primary-fg-color: var(--color-gray);
+    --md-primary-fg-color--light: var(--color-invenio);
+    --md-primary-fg-color--dark: var(--color-dark-blue);
+    --gradient-header: linear-gradient(
+        90deg,
+        var(--color-invenio),
+        var(--color-invenio) 52.52%,
+        var(--color-light-coral)
+    ) no-repeat;
+
+    .md-nav__link--active {
+        color: var(--color-black);
+        opacity: 0.54;
+    }
+
+    .md-typeset a:hover,
+    .md-nav__link:hover {
+        color: var(--color-black);
+    }
+
+    .md-nav__title {
+        color: unset;
+    }
+
+    .md-tabs__link {
+        color: inherit;
+    }
+
+    .md-header,
+    .md-tabs {
+        background: var(--gradient-header);
+        color: var(--color-white);
+    }
+
+    .md-search form.md-search__form {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--color-white);
+        transition: 0.3 ease-in;
+    }
+
+    .md-search form.md-search__form:hover {
+        color: rgba(0, 0, 0, 0.54);
+    }
+
+    .md-header[data-md-state='shadow'] {
+        box-shadow: none;
+        border-bottom: 0.05rem solid var(--color-white);
+    }
+
+    .md-footer {
+        background-color: var(--color-invenio);
+    }
+
+    .ils-hero-bg {
+        background: linear-gradient(
+            12deg,
+            rgba(3, 119, 205, 1),
+            rgba(3, 119, 205, 1) 52.52%,
+            rgba(251, 130, 115, 0.69)
+        );
+    }
+
+    .ils-hero .ils-hero-subtitle {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    body[data-md-color-scheme] .md-main {
+        background-color: var(--color-white);
+    }
 }
 
-.md-source__facts {
-  display: none;
+/* Dark mode */
+/* --------- */
+[data-md-color-scheme='slate'] {
+    .ils-hero-bg {
+        background: linear-gradient(
+            12deg,
+            hsla(205, 99%, 30%, 0.432),
+            rgba(1, 88, 150, 0.438) 52.52%,
+            rgba(179, 93, 81, 0.329)
+        );
+    }
 }
 
-/* LOGO */
-.md-header__button.md-logo {
-  padding-top: 0.3rem;
+/* Common styles */
+/* ------------- */
+
+.ils-hero {
+    height: 557px;
+    text-align: center;
+    margin-bottom: -2px;
+
+    > img {
+        margin-top: 75px;
+        height: 80px;
+    }
+
+    > a.md-button:hover {
+        background-color: var(--color-white);
+        border-color: var(--color-white);
+        color: var(--color-invenio);
+    }
+
+    .ils-hero-subtitle {
+        font-size: 30px;
+        font-weight: 300;
+        font-family: Oswald, 'Open Sans', sans-serif;
+        margin: 15px 0px 20px 0px;
+    }
 }
 
-.md-header__button.md-logo img {
-  width: 131px;
-  height: 30px;
-}
-/* //LOGO */
-
-/* SEARCH BAR */
-[data-md-color-primary="white"] .md-search__input + .md-search__icon {
-  color: white;
+.ils-hero > a.md-button.md-button--primary:hover {
+    background-color: transparent;
+    border-color: var(--color-white);
+    color: var(--color-white);
 }
 
-[data-md-color-primary="white"] .md-search__input::placeholder {
-  color: white;
-}
-/* //SEARCH BAR */
-
-.md-footer {
-  border-top: 0.05rem solid #ffffff;
-}
-
-.md-footer__link {
-  padding-top: 0.8rem;
-  padding-bottom: 0;
+.ils-hero-bg {
+    display: block;
+    width: 100%;
+    height: 673px;
+    position: absolute;
+    top: 0;
+    z-index: -1;
 }
 
-.md-footer {
-  background-color: #0377cd;
+.ils-hero-bg .wave-svg {
+    fill: var(--md-default-bg-color);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    transform: translateY(1px);
 }
 
-.md-footer__link {
-  color: #ffffff;
-  opacity: 0.75;
+@media screen and (min-width: 1920px) {
+    .ils-hero-bg {
+        height: 700px;
+    }
 }
 
-.md-footer__direction {
-  color: #ffffff;
-  opacity: 0.75;
+@media screen and (min-width: 2000px) {
+    .ils-hero-bg {
+        height: 749px;
+    }
 }
 
-.md-footer__link:hover,
-.md-footer__direction:hover {
-  opacity: 1;
+@media screen and (min-width: 3000px) {
+    .ils-hero-bg {
+        height: 850px;
+    }
 }
 
-.md-footer-meta {
-  background-color: rgba(3, 119, 205, 1);
+@media screen and (min-width: 4500px) {
+    .ils-hero-bg {
+        height: 1000px;
+
+        .wave-svg {
+            display: none;
+        }
+    }
 }
 
-html .md-footer-meta .md-footer-meta__inner a {
-  color: #ffffff;
+.md-typeset table code {
+    word-break: normal;
 }
 
-.md-footer-meta__inner {
-  padding: 0 0.2rem;
+.md-typeset .md-button.md-button--primary {
+    background-color: var(--color-white);
+    border-color: var(--color-white);
+    color: var(--color-invenio);
+    opacity: 100%;
 }
 
-.md-footer-copyright {
-  padding: 0.7rem 0;
+.md-typeset .md-button--primary {
+    color: var(--color-white);
+    opacity: 100%;
 }
 
-.md-footer-social {
-  padding: 0.4rem 0;
+.md-typeset .md-button {
+    color: var(--color-white);
 }
 
-.md-search-result__link[data-md-state="active"] {
-  background-color: #ffffff;
+.ils-toc {
+    display: flex;
+    justify-content: center;
 }
 
-.md-typeset h1[id] .headerlink:focus,
-.md-typeset h1[id]:hover .headerlink:hover,
-.md-typeset h1[id]:target .headerlink,
-.md-typeset h2[id] .headerlink:focus,
-.md-typeset h2[id]:hover .headerlink:hover,
-.md-typeset h2[id]:target .headerlink,
-.md-typeset h3[id] .headerlink:focus,
-.md-typeset h3[id]:hover .headerlink:hover,
-.md-typeset h3[id]:target .headerlink,
-.md-typeset h4[id] .headerlink:focus,
-.md-typeset h4[id]:hover .headerlink:hover,
-.md-typeset h4[id]:target .headerlink,
-.md-typeset h5[id] .headerlink:focus,
-.md-typeset h5[id]:hover .headerlink:hover,
-.md-typeset h5[id]:target .headerlink,
-.md-typeset h6[id] .headerlink:focus,
-.md-typeset h6[id]:hover .headerlink:hover,
-.md-typeset h6[id]:target .headerlink {
-  color: rgba(3, 119, 205, 1);
+.ils-toc-item.level1 {
+    display: inline-flex;
 }
 
-::placeholder {
-  color: #ffffff;
+.ils-toc-item.level1 > div > a {
+    font-weight: bolder;
+}
+
+.ils-toc-item.level1 > div {
+    width: 200px;
+}
+
+.ils-toc-item.level2 {
+    font-size: small;
 }
