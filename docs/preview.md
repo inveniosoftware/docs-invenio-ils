@@ -32,7 +32,7 @@ pip install -U invenio-cli
 Generate your InvenioILS instance. Replace `<version>` with the version you want to install
 
 ```shell
-invenio-cli init ils -c v4.0.0
+invenio-cli init ils -c v4.5.0
 ```
 
 You will be asked several questions. If in doubt, choose the default.
