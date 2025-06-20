@@ -26,7 +26,7 @@ You can have a quick look to InvenioILS by running a demo instance.
 
 Customization of InvenioILS requires a bunch of steps to be performed. See the related documentation.
 
-[> Develop with InvenioILS](customize/develop.md)
+[> Develop with InvenioILS](install.md)
 
 ## Reference
 
