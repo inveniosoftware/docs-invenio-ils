@@ -2,7 +2,7 @@
 
 At this moment, the easiest way to preview InvenioILS is to install Docker in your machine and simply run docker-compose to start all the needed services.
 
-If you want to develop or make changes on InvenioILS, you will have instead to follow the [development installation guide](customize/develop.md).
+If you want to develop or make changes on InvenioILS, you will have instead to follow the [development installation guide](install.md).
 
 ## Prerequisites
 

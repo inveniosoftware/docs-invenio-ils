@@ -43,8 +43,8 @@ theme:
 nav:
   - Home: index.md
   - Preview: preview.md
+  - Install: install.md
   - Customize:
-    - Local development: customize/develop.md
     - Static pages: customize/static_pages.md
     - User anonymization: customize/anonymization.md
     - Vocabularies: customize/vocabularies.md
