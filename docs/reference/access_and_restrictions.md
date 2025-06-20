@@ -1,6 +1,8 @@
 # Access and restrictions
 
-This is only a part of a bigger article, with many sections still not documented. If you are an expert on the subject, please contribute.
+
+!!! note
+    This is only a part of a bigger article, with many sections still not documented. If you are an expert on the subject, please contribute.
 
 
 ## Access roles
