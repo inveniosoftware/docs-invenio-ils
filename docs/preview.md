@@ -21,7 +21,7 @@ $ docker-compose --version
 docker-compose version 1.27.4, build 40524192
 ```
 
-## [Setup](../reference/scaffold.md)
+## [Setup](./reference/scaffold.md)
 
 Now, install InvenioCLI tool which will be used to scaffold your InvenioILS instance:
 
