@@ -33,7 +33,7 @@ invenio-cli init ils -c v4.5.0
 You will be asked several questions. If in doubt, choose the default. For this tutorial we assume you left the project name as the default: `my-site`.
 
 
-For more information about the scaffolding process, see the [scaffold reference](../reference/scaffold.md).
+For more information about the scaffolding process, see the [scaffold reference](./reference/scaffold.md).
 
 ### 2. Start all dependent services using docker-compose
 This will start PostgreSQL, Elasticsearch, RabbitMQ and Redis:
