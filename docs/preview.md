@@ -29,7 +29,7 @@ Now, install InvenioCLI tool which will be used to scaffold your InvenioILS inst
 pip install -U invenio-cli
 ```
 
-Generate your Invenio ILS instance. Replace `<version>` with the version you want to install
+Generate your InvenioILS instance. Replace `<version>` with the version you want to install
 
 ```shell
 invenio-cli init ils -c v4.0.0
