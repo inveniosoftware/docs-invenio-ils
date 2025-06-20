@@ -1,9 +1,11 @@
  # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2020 CERN.
+# Copyright (C) 2020-2025 CERN.
 #
 # Invenio-app-ils is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 
-mkdocs
-mkdocs-material
+mkdocs>=1.6.1,<2
+mkdocs-material>=9.6.14,<10
+mkdocs-glightbox>=0.4.0
+
