@@ -4,21 +4,57 @@ A relation is simply a link, a reference, from one record to another. Optionally
 
 ## Understanding the data model
 
-In InvenioILS, only document and series can have relations. Other models do not have this functionality enabled. (TODO link to domain section).
-Three kind of relation exists in InvenioILS:
-* `Parent-Child relation`: models the relation between a series (serial or multipart monograph) and a set of other series or documents. For example, a series (*the parent*) can contain a set of documents (*the children*), or it can contain multipart monographs (*the children*, but also *the parent*) which they contain documents (*the children*). InvenioILS models theses types of `Parent-Child relation`:
-  * `Multipart Monograph relation`
-  * `Serial relation`
-  Parent-Child relations can optionally have the extra field `volume` that describe the relation. For example, in a serial or periodical, each issue is normally described by `issue+volume`: this information can be added to the relation description.
-TODO add a small diagram here?
+In InvenioILS, only documents and series can have relations. Other models do not have this functionality enabled.
+<!-- TODO: link to domain section -->
 
-* `Siblings relation`: models the relation between records of the same model, where the order is not important, unordered. For example a series and a series or documents and documents. InvenioILS models theses types of `Siblings relation`:
-  * `Language relation`
-  * `Edition relation`
-  * `Other relation`
-  Siblings relations can optionally have the extra field `note` that describe the relation. This can useful to describe the `Other relation` and give a meaning to it.
+Three kinds of relations exist in InvenioILS:
+### Parent-Child relation
 
-* `Sequence relation`: models the relation between records of the same model, where the order is important. For example, a journal series that at certain point in time stops the publication of volumes and issues (*the previous*) but it then continues in a completely new series (*the next*): the older series *is continued by* the new one, or the new series *continues* the older one.
+Models the relation between a series (serial or multipart monograph) and a set of other series or documents.
+
+For example:
+
+- A series (**the parent**) can contain:
+    - A set of documents (**the children**).
+    - Multipart monographs (**the children**, but also **the parent**), which can contain:
+        - documents (**the children**).
+
+InvenioILS models these types of `Parent-Child relation`:
+
+- `Serial relation`
+- `Multipart Monograph relation`
+
+Parent-Child relations can optionally have the extra field `volume` that describes the relation.
+For example, in a serial or periodical, each issue is normally described by `issue+volume`: this information can be added to the relation description.
+
+<!-- TODO: add a small diagram here -->
+
+### Siblings relation
+Models the relation between records of the same model, where the order is not important (unordered).
+
+For example:
+
+- A series and another series
+- A document and another document
+
+InvenioILS models these types of `Siblings relation`:
+
+- `Language relation`
+- `Edition relation`
+- `Other relation`
+
+Siblings relations can optionally have the extra field `note` that describes the relation.  
+This can be useful to describe the `Other relation` and give a meaning to it.
+
+### Sequence relation
+Models the relation between records of the same model, where the order is important.
+For example:
+
+- A journal series that stops publishing volumes and issues at a certain point in time (**the old**) and continues as a new series afterwards (**the new**)
+    - The old series **is continued by** the new one
+    - The new series **continues** the old one
+
+
 
 ## Under the hood
 
