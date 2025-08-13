@@ -95,10 +95,27 @@ This step ensures that all subsequent commands use the correct Python environmen
 
 ### Database migration
 
+Prepare the `userprofiles_userprofile` DB table data for seamless migration (the table will be moved to invenio_accounts). 
+
+
+!!! warning "SQL QUERIES"
+
+    Apply this change only if your `username` column of `userprofiles_userprofile` table was not populated initially.
+
+```sql
+UPDATE userprofiles_userprofile SET username = (SELECT up.displayname FROM userprofiles_userprofile up WHERE up.user_id = userprofiles_userprofile.user_id) WHERE username is null;
+```
+
+Escape apostrophes in the users' names:
+
+```sql
+UPDATE userprofiles_userprofile SET full_name = REPLACE(full_name, '''', '''''') WHERE full_name LIKE '%''%';
+```
+
 Execute the database migration:
 
 ```bash
-invenio alembic upgrade
 invenio alembic stamp 145402e8523a
 invenio alembic upgrade
 ```
+
