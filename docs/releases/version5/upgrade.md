@@ -71,6 +71,12 @@ invenio-cli packages lock
 ```
 
 ##### Step 4
+Add the following env variable to your instance:
+```
+INVENIO_SITE_API_URL: '<your site URL>/api'
+```
+
+##### Step 5
 
 Install InvenioILS v5:
 
