@@ -1,13 +1,9 @@
 ## Prerequisites
-
-The steps listed in this article require an existing local installation of InvenioRDM v12.
+The steps listed in this article require an existing local installation of InvenioILS v4.
 
 !!! warning "Backup"
 
     Always backup your database, statistics indices and files before you try to perform an upgrade.
-
-!!! info "Older Versions"
-    If your InvenioRDM installation is older than v12, you must first upgrade to v12 before proceeding with the steps in this guide.
 
 ## Upgrade Steps
 
@@ -32,7 +28,7 @@ Python 3.9 or 3.11 or 3.12 is required to run InvenioILS v13.
 !!! info "Python 3.9 end-of-life"
     Official support for Python 3.9 will end on October 31, 2025.
     See the [official Python version status page](https://devguide.python.org/versions/) for more information.
-    Future releases of InvenioRDM will require a more recent Python version.
+    Future releases of InvenioILS will require a more recent Python version.
 
 The minimum required OpenSearch version is now **v2.12**. See [below](#opensearch-version) on how to upgrade older versions.
 
