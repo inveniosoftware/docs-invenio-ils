@@ -88,6 +88,8 @@ nav:
     - Overview: releases/index.md
     - Version 5:
         - Upgrade from v4 to v5: releases/version5/upgrade.md
+    - Version 6:
+        - Upgrade from v6.0 to v6.1: releases/version6/upgrade-v6.1.md
 
 # Customization
 extra:
