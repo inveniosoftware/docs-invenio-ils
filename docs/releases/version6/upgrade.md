@@ -1,6 +1,6 @@
 ## Prerequisites
 
-The steps listed in this article require an existing local installation of InvenioILS v6.0.
+The steps listed in this article require an existing local installation of InvenioILS v5.
 
 !!! warning "Backup"
 
@@ -8,8 +8,25 @@ The steps listed in this article require an existing local installation of Inven
 
 ## Upgrade Steps
 
-### Create new templates
-This step should be done before upgrading `invenio-app-ils` to v6.1.0.
+### Upgrade to v6.0
+
+#### (Optional) Read-Only Backoffice Access
+
+Version 6.0 introduces read-only backoffice access through a new access action: `ils-backoffice-readonly-access`
+
+Users or roles with this action can view all backoffice resources without the ability to create, update, or delete records.
+For more details see [Managing access](../../reference/access_and_restrictions.md).
+
+For instructions on creating users, roles, and tokens with this access action, see the [CLI Users & Authentication reference](../../reference/cli/users-authentication.md).
+
+### Upgrade to v6.1
+!!! warning Steps required before updating 
+
+    The following steps should be performed before upgrading invenio-app-ils to v6.1.0
+
+Version 6.1 introduces new statistics for record changes.
+For them to work correctly, search templates need to be created before the indices are.
+Thus, the following steps should be performed before upgrading `invenio-app-ils` to v6.1.0.
 
 #### Verify the templates don't already exist
 
@@ -20,11 +37,11 @@ GET _template/ils-record-changes-v1
 ```
 GET _template/aggr-ils-record-changes-v1
 ```
- 
+
 #### Create the new templates
 
 ```
-PUT _template/ils-record-changes-v1 
+PUT _template/ils-record-changes-v1
 {
     "order": 0,
     "index_patterns": [
@@ -70,7 +87,7 @@ PUT _template/ils-record-changes-v1
 ```
 
 ```
-PUT _template/aggr-ils-record-changes-v1 
+PUT _template/aggr-ils-record-changes-v1
 {
     "order": 0,
     "index_patterns": [
@@ -168,8 +185,5 @@ DELETE events-stats-ils-record-changes-test
 ```
 
 
-### Upgrade InvenioILS
+#### Upgrade InvenioILS
 Now upgrade `invenio-app-ils` to v6.1.0.
-
-
-

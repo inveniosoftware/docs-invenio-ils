@@ -11,7 +11,23 @@ Superuser (Admin) - Actor having the access to set up the application configurat
 
 Librarian - Actor in charge of managing and curating the data, and the workflows.
 
+Librarian (Read-only) - Actor with view-only access to the backoffice. 
+Can view all backoffice resources but cannot create, update, or delete records. 
+Ideal for external integrations that only need to read data like statistics reporting.
+
 Patron - Actor interacting with the system from the outside, using the feature of the system to cover his demand for books/articles/publications and to interact with the library.
+
+## Backoffice Access Permissions
+
+InvenioILS provides two access actions for backoffice access:
+
+**`ils-backoffice-access`** - Full backoffice access
+: Users or roles with this action have full access to the backoffice, including the ability to create, update, and delete all records.
+
+**`ils-backoffice-readonly-access`** - Read-only backoffice access (Available from [v6.0](../releases/version6/upgrade.md))
+: Users or roles with this action can view all backoffice resources but cannot create, update, or delete any records.
+
+For instructions on setting up users and roles with these access actions, see the [CLI Users & Authentication reference](cli/users-authentication.md).
 
 ## Document Record
 
