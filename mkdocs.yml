@@ -54,7 +54,11 @@ nav:
     - Records relations: reference/record_relations.md
     - Managing access: reference/access_and_restrictions.md
     - Scaffold: reference/scaffold.md
-    - CLI: reference/cli.md
+    - CLI:
+      - Overview: reference/cli/index.md
+      - General commands: reference/cli/general-commands.md
+      - Services commands: reference/cli/services-commands.md
+      - Users & Authentication: reference/cli/users-authentication.md
     - REST API:
       - Overview: reference/api/index.md
       - Document API: reference/api/document.md
