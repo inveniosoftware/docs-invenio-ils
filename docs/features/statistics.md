@@ -16,6 +16,6 @@ Tracking how users interact with digital resources, including views and download
 
 ## Additional Statistics
 
-InvenioILS tracks additional statistics that are not yet displayed in the backoffice interface. These statistics are accessible through the API and can be integrated into custom dashboards for advanced reporting and analysis.
+InvenioILS tracks additional statistics that are accessible through the REST API for advanced reporting and analysis.
 
 For detailed information about these statistics, including API endpoints and usage examples, see the [Statistics Reference](../reference/stats/index.md).
