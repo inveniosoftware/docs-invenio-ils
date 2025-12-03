@@ -47,6 +47,7 @@ nav:
   - Customize:
     - Static pages: customize/static_pages.md
     - User anonymization: customize/anonymization.md
+    -  Adding Users to the instance: customize/users.md
     - Vocabularies: customize/vocabularies.md
     - Configure: customize/configure.md
   - Reference:
