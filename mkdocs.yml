@@ -96,6 +96,8 @@ nav:
         - Upgrade from v4 to v5: releases/version5/upgrade.md
     - Version 6:
         - Upgrade from v5 to v6: releases/version6/upgrade.md
+    - Version 7:
+        - Upgrade from v6 to v7: releases/version6/upgrade.md
 
 # Customization
 extra:
