@@ -346,7 +346,7 @@ Number of tags to display in the facets.
 
 ### RECORDS_REST_FACETS
 
-Disctionary defining facets (search filters visible on the left hand side of search pages) for Records REST endpoints.
+Dictionary defining facets (search filters visible on the left hand side of search pages) for Records REST endpoints.
 
 ```python
 dict(
@@ -422,7 +422,7 @@ ILS_VOCABULARIES = [
 ]
 ```
 
-> You can ceate new vocabularies and them to the list, note that this requires some advanced developer experience.
+> You can create new vocabularies and them to the list, note that this requires some advanced developer experience.
 
 ### ILS_VOCABULARY_SOURCES
 
@@ -634,3 +634,119 @@ SPA_HOST = "https://127.0.0.1:3000"
 - This list includes only a subset of all available configuration variables. For a complete list, refer to the official InvenioILS documentation or source code.
 - Replace example values with actual values suitable for your instance.
 - Ensure to restart the application after modifying configuration variables for changes to take effect.
+
+## Use Cases
+Listed below are various use cases of features that can be achieved through editing the configuration variables.
+
+### New Document Type
+To add a new document type to your customised version of InvenioILS, there are three areas of the codebase that
+must be changed.
+
+1. The list of document types
+2. The classes that use the document types 
+3. The configuration files (affects the UI and API)
+
+The file structure that should be created to overwrite and modify the existing classes is as follows.
+
+```
+<overlay-name>/
+├── documents/
+│   ├── loaders/
+│   │   ├── jsonschemas/
+│   │   │   ├── __init__.py
+│   │   │   └── document.py
+│   │   └── __init__.py
+│   └── api.html
+└── config.py
+ui/
+└── src/
+    └── config.js
+```
+
+#### List of document types
+The list of document types can be found in `api.py` and can be overwritten in the following manner.
+
+```python
+from invenio_app_ils.documents.api import Document as ILSDocument
+
+class Document(ILSDocument):
+    DOCUMENT_TYPES = ILSDocument.DOCUMENT_TYPES + ["NEW_DOC_TYPE"]
+```
+
+#### Classes using document types
+The classes that then use this list of document types are `document.py` and `loaders/__init__.py` that can be overwritten in the following manner.
+
+```python
+from invenio_app_ils.documents.loaders.jsonschemas.document import (
+    DocumentSchemaV1 as ILSDocumentSchemaV1,
+)
+from marshmallow import fields, validate
+from <overlay-name>.documents.api import Document
+
+class DocumentSchemaV1(ILSDocumentSchemaV1):
+    document_type = fields.Str(
+        required=True, validate=validate.OneOf(Document.DOCUMENT_TYPES)
+    )
+```
+
+To ensure the new loader is being used, we now import it into the entry point to the module.
+
+```python
+from invenio_app_ils.records.loaders import ils_marshmallow_loader
+from .jsonschemas.document import DocumentSchemaV1
+
+document_loader = ils_marshmallow_loader(DocumentSchemaV1)
+```
+
+#### Configuration files
+We finally need to update the config on both the frontend and the backend to ensure the new document type appears visually and through the API.
+
+The frontend changes involve appending the new document type to a hardcoded list of document types.
+
+```javascript
+// Update only DOCUMENTS.types section; leave other sections unchanged
+export const config = {
+  APP: {...},
+  CIRCULATION: {...},
+  VOCABULARIES: {...},
+  DOCUMENTS: {
+    extensions: {...},
+    authors: {...},
+    types: [
+      { value: "BOOK", text: "Book", label: "Book", order: 1 },
+      { value: "PROCEEDINGS", text: "Proceedings", label: "Proceedings", order: 2 },
+      { value: "STANDARD", text: "Standard", label: "Standard", order: 3 },
+      { value: "SERIAL_ISSUE", text: "Serial issue", label: "Serial issue", order: 4 },
+      { value: "ARTICLE", text: "Article", label: "Article", order: 5 },
+      { value: "MULTIMEDIA", text: "Multimedia", label: "Multimedia", order: 6 },
+      { value: "NEW_DOC_TYPE", text: "New Doc Type", label: "New Doc Type", order: 7 },
+    ],
+  },
+  ILL_BORROWING_REQUESTS: {...},
+  PATRONS: {...},
+  ITEMS: {...},
+  IMPORTER: {...},
+  ACQ_ORDERS: {...},
+};
+```
+
+The backend changes involve setting the endpoints to use the overwritten classes rather than the default InvenioILS classes.
+
+```python
+# Replace this line
+from invenio_app_ils.documents.api import DOCUMENT_PID_TYPE, Document
+# With these lines
+from invenio_app_ils.documents.api import DOCUMENT_PID_TYPE
+from <overlay-name>.documents.api import Document
+
+# Add these lines
+RECORDS_REST_ENDPOINTS[DOCUMENT_PID_TYPE]["record_loaders"] = {
+    "application/json": "<overlay-name>.documents.loaders:document_loader"
+}
+RECORDS_REST_ENDPOINTS[DOCUMENT_PID_TYPE]["record_class"] = Document
+RECORDS_REST_ENDPOINTS[DOCUMENT_PID_TYPE][
+    "item_route"
+] = '/documents/<pid(docid, record_class="<overlay-name>.documents.api:Document"):pid_value>'
+```
+
+The new document type should now appear as an option when creating new documents, editing existing documents, or searching for documents as a filter.
