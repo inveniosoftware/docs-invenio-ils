@@ -701,9 +701,12 @@ document_loader = ils_marshmallow_loader(DocumentSchemaV1)
 #### Configuration files
 We finally need to update the config on both the frontend and the backend to ensure the new document type appears visually and through the API.
 
-The frontend changes involve appending the new document type to a hardcoded list of document types.
+The frontend changes involve appending the new document type to the imported default configuration of document types.
 
 ```javascript
+// Add import at the start
+import { DOCUMENT_TYPES } from "@inveniosoftware/react-invenio-app-ils";
+
 // Update only DOCUMENTS.types section; leave other sections unchanged
 export const config = {
   APP: {...},
@@ -713,13 +716,13 @@ export const config = {
     extensions: {...},
     authors: {...},
     types: [
-      { value: "BOOK", text: "Book", label: "Book", order: 1 },
-      { value: "PROCEEDINGS", text: "Proceedings", label: "Proceedings", order: 2 },
-      { value: "STANDARD", text: "Standard", label: "Standard", order: 3 },
-      { value: "SERIAL_ISSUE", text: "Serial issue", label: "Serial issue", order: 4 },
-      { value: "ARTICLE", text: "Article", label: "Article", order: 5 },
-      { value: "MULTIMEDIA", text: "Multimedia", label: "Multimedia", order: 6 },
-      { value: "NEW_DOC_TYPE", text: "New Doc Type", label: "New Doc Type", order: 7 },
+      ...DOCUMENT_TYPES,
+      {
+        value: "NEW_DOC_TYPE",
+        text: "New Doc Type",
+        label: "New Doc Type",
+        order: DOCUMENT_TYPES.length + 1,
+      },
     ],
   },
   ILL_BORROWING_REQUESTS: {...},
