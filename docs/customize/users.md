@@ -1,12 +1,12 @@
-# Adding Users to Invenio ILS instance
+# Adding users to InvenioILS instance
 
-This guide provides step-by-step instructions for adding users to a custom Invenio App ILS instance using:
+This guide provides step-by-step instructions for adding users to your own InvenioILS instance using two possible different methods:
 
-- An existing database
-- LDAP synchronization
+1. LDAP synchronization
+2. An existing database
 
 !!! Note
-    The following guides are just an example to give you an idea of how you can get started on existing users to your Invenio ILS instance!
+    The following guides are just an example to give you an idea of how you can get started on existing users to your InvenioILS instance!
 
     Similar scripts can also be used to port other cataloging data like Documents, E-Items, Purchase Orders and more!
 
@@ -14,13 +14,12 @@ This process is suitable for administrators who have just set up a new instance 
 
 ### Prerequisites
 
-- A running instance of Invenio App ILS.
-- Administrative access to the Invenio App ILS instance.
-- Python installed on your system.
+- A running instance of InvenioILS.
+- Administrative access to the InvenioILS instance.
 
-## Adding Users to Invenio App ILS Instance using LDAP Sync
+## 1. Adding users using LDAP sync
 
-### Step 1: Install LDAP3
+### 1.1 Install LDAP3
 
 First, ensure that the `ldap3` library is installed. You can install it using pip:
 
@@ -30,9 +29,9 @@ pip install ldap3
 
 Make sure you have access to the LDAP directory with user data.
 
-### Step 2: Configure LDAP Connection
+### 1.2 Configure LDAP Connection
 
-Create or update the configuration file for your Invenio App ILS instance to include LDAP connection details. Add the following configuration variables:
+Create or update the configuration file for your InvenioILS instance to include LDAP connection details. Add the following configuration variables:
 
 ```python
 LDAP_SERVER = 'ldap://your-ldap-server.com'
@@ -50,9 +49,9 @@ LDAP_USER_FIELDS_MAPPING = {
 }
 ```
 
-### Step 3: Create a Script for LDAP Sync
+### 1.3 Create a Script for LDAP Sync
 
-Create a Python script to synchronize LDAP users with the Invenio App ILS database. Save the following script as `ldap_sync.py`:
+Create a Python script to synchronize LDAP users with the InvenioILS database. Save the following script as `ldap_sync.py`:
 
 ```python
 import os
@@ -114,9 +113,9 @@ if __name__ == '__main__':
     ldap_sync()
 ```
 
-## Adding Users to Invenio App ILS Instance from a Custom Database
+## 2. Adding users from an existing external database
 
-### Step 1: Install Required Packages
+### 2.1 Install Required Packages
 
 Ensure that the required Python packages are installed. You can install them using pip:
 
@@ -124,9 +123,9 @@ Ensure that the required Python packages are installed. You can install them usi
 pip install sqlalchemy
 ```
 
-Make sure you have access to the custom user database.
+Make sure you have access to the external user database.
 
-### Step 2: Configure Database Connection
+### 2.2 Configure Database Connection
 
 Create a configuration file or environment variables to store your database connection details. Here's an example of setting up a configuration file:
 
@@ -135,9 +134,9 @@ CUSTOM_DB_URI = 'postgresql://user:password@localhost/customdb'
 INVENIO_DB_URI = 'postgresql://invenio:password@localhost/invenio'```
 ````
 
-### Step 3: Create a Script to Port Users
+### 2.3 Create a script to import users
 
-Create a Python script to read users from the custom database and add them to the Invenio App ILS database. Save the following script as **port_users.py**:
+Create a Python script to read users from the external database and add them to the InvenioILS database. Save the following script as **import_users.py**:
 
 ```python
 import os
@@ -148,7 +147,7 @@ from invenio_db import db
 from invenio_app.factory import create_api
 
 # Load configuration
-custom_db_uri = os.getenv('CUSTOM_DB_URI', 'postgresql://user:password@localhost/customdb')
+external_db_uri = os.getenv('CUSTOM_DB_URI', 'postgresql://user:password@localhost/customdb')
 invenio_db_uri = os.getenv('INVENIO_DB_URI', 'postgresql://invenio:password@localhost/invenio')
 
 # Create SQLAlchemy engines and sessions
@@ -165,7 +164,7 @@ invenio_session = InvenioSession()
 metadata = MetaData()
 users_table = Table('users', metadata, autoload_with=custom_engine)
 
-def port_users():
+def import_users():
     # Query all users from the custom database
     custom_users = custom_session.query(users_table).all()
 
@@ -176,7 +175,7 @@ def port_users():
         first_name = custom_user.first_name
         last_name = custom_user.last_name
 
-        # Check if the user already exists in Invenio ILS DB
+        # Check if the user already exists in InvenioILS DB
         user = invenio_session.query(User).filter_by(email=email).first()
 
         if user is None:
@@ -199,13 +198,13 @@ def port_users():
 
     # Commit the changes
     invenio_session.commit()
-    print("User porting complete.")
+    print("User importing complete.")
 
 if __name__ == '__main__':
     # Initialize Invenio app context
     app = create_api()
     with app.app_context():
-        port_users()
+        import_users()
 
     # Close sessions
     custom_session.close()
@@ -214,6 +213,6 @@ if __name__ == '__main__':
 
 ### Additional Tips
 
-You may schedule the script to run periodically (e.g., using a cron job) if you need to keep the Invenio user database in sync with your custom database/LDAP directory.
+You may schedule the script to run periodically (e.g., using a cron job) if you need to keep the InvenioILS user database in sync with your external database or LDAP directory.
 
 Feel free to adjust the configurations and script to better fit your specific environment and requirements.
