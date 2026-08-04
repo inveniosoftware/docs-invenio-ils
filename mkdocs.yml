@@ -96,6 +96,7 @@ nav:
   - Deploy:
     - Infrastructure: deploy/infrastructure.md
     - Deployment: deploy/deployment.md
+    - Upgrading index mappings: deploy/upgrading_index_mappings.md
   - Releases:
     - Overview: releases/index.md
     - Version 5:
